@@ -1,0 +1,13 @@
+.summaryBudgets_container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 950px) {
+  .summaryBudgets_container {
+    grid-template-columns: 1fr;
+  }
+}
