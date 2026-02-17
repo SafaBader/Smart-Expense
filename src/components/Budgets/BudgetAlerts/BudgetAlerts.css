@@ -68,3 +68,23 @@
   color: #6b7280;
   line-height: 1.35;
 }
+.budgetAlerts_itemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.budgetAlerts_closeBtn {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #6b7280;
+}
+
+.budgetAlerts_closeBtn:hover {
+  color: #dc2626;
+}
+.budgetAlerts_item {
+  transition: opacity 0.2s ease;
+}
