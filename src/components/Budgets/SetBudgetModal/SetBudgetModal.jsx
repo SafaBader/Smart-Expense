@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./SetBudgetModal.css";
 
 const ALL_CATEGORIES = [
@@ -12,15 +12,24 @@ const ALL_CATEGORIES = [
 
 function SetBudgetModal({ isOpen, onClose, existingBudgets, onCreate }) {
   const usedNames = useMemo(() => {
-    return new Set((existingBudgets || []).map((b) => String(b.name || "").toLowerCase()));
+    return new Set(
+      (existingBudgets || []).map((b) => String(b.name || "").toLowerCase())
+    );
   }, [existingBudgets]);
 
   const availableCategories = useMemo(() => {
     return ALL_CATEGORIES.filter((c) => !usedNames.has(c.toLowerCase()));
   }, [usedNames]);
 
-  const [category, setCategory] = useState(availableCategories[0] || "Other");
+  const [category, setCategory] = useState("Other");
   const [monthlyLimit, setMonthlyLimit] = useState("");
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    setCategory(availableCategories[0] || "Other");
+    setMonthlyLimit("");
+  }, [isOpen, availableCategories]);
 
   if (!isOpen) return null;
 
@@ -32,7 +41,6 @@ function SetBudgetModal({ isOpen, onClose, existingBudgets, onCreate }) {
     if (!Number.isFinite(limitNum) || limitNum <= 0) return;
 
     onCreate({ name: category, monthlyLimit: limitNum });
-    setMonthlyLimit("");
     onClose();
   }
 
@@ -63,6 +71,7 @@ function SetBudgetModal({ isOpen, onClose, existingBudgets, onCreate }) {
             className="setBudgetModal_select"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
+            disabled={availableCategories.length === 0}
           >
             {availableCategories.length === 0 ? (
               <option value="">{`All categories already have budgets`}</option>
@@ -97,7 +106,11 @@ function SetBudgetModal({ isOpen, onClose, existingBudgets, onCreate }) {
             Create Budget
           </button>
 
-          <button type="button" className="setBudgetModal_secondary" onClick={onClose}>
+          <button
+            type="button"
+            className="setBudgetModal_secondary"
+            onClick={onClose}
+          >
             Cancel
           </button>
         </footer>

@@ -27,8 +27,8 @@ function AllBudgets({ budgets, setBudgets, userId }) {
             key={b.id}
             id={b.id}
             name={b.name}
-            spent={0}
-            limit={b.monthlyLimit}
+            spent={b.spent}
+            limit={b.limit}
             onDelete={handleDelete}
             onUpdate={handleUpdate}
           />

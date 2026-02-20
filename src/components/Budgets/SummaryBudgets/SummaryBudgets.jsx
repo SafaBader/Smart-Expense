@@ -1,38 +1,29 @@
 import "./SummaryBudgets.css";
-import SummaryCard from "./SummaryCard";
 
-function SummaryBudgets() {
-  // dummy values for now (later from Firebase)
-  const totalBudget = 1150;
-  const totalSpent = 1010;
-  const remaining = totalBudget - totalSpent;
-
+function SummaryBudgets({ totals }) {
   const money = (n) =>
-    new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
+    new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
+      Number(n) || 0
+    );
 
   return (
-    <section className="summaryBudgets_container" aria-label="Budgets summary">
-      <SummaryCard
-        title="Total Budget"
-        amount={money(totalBudget)}
-        icon="💳"
-        iconClass="summaryCard_blue"
-      />
+    <section className="summary_container">
+        <article className="summary_card summary_total">
+            <span className="summary_label">Total Budget</span>
+            <span className="summary_value">{money(totals.totalBudget)}</span>
+        </article>
 
-      <SummaryCard
-        title="Total Spent"
-        amount={money(totalSpent)}
-        icon="🧾"
-        iconClass="summaryCard_purple"
-      />
+        <article className="summary_card summary_spent">
+            <span className="summary_label">Total Spent</span>
+            <span className="summary_value">{money(totals.totalSpent)}</span>
+        </article>
 
-      <SummaryCard
-        title="Remaining"
-        amount={money(remaining)}
-        icon="✅"
-        iconClass="summaryCard_green"
-      />
-    </section>
+        <article className="summary_card summary_remaining">
+            <span className="summary_label">Remaining</span>
+            <span className="summary_value">{money(totals.remaining)}</span>
+        </article>
+        </section>
+
   );
 }
 
