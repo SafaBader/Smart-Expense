@@ -1,20 +1,16 @@
 import "./HeaderBudget.css";
 
-function HeaderBudget() {
+function HeaderBudget({ onSetBudgetClick }) {
   return (
     <header className="headerBudget_container">
-      
-      <hgroup className="headerBudget_text">
+      <section className="headerBudget_text">
         <h1 className="headerBudget_title">Budgets</h1>
-        <p className="headerBudget_subtitle">
-          Manage your monthly spending limits
-        </p>
-      </hgroup>
+        <p className="headerBudget_subtitle">Manage your monthly spending limits</p>
+      </section>
 
-      <button className="headerBudget_button">
-        Set Budget
+      <button className="headerBudget_button" type="button" onClick={onSetBudgetClick}>
+        + Set Budget
       </button>
-
     </header>
   );
 }

@@ -1,23 +1,19 @@
-import { useState } from "react";
 import "./AllBudgets.css";
 import BudgetCard from "./BudgetCard";
+import { deleteBudget, updateBudget } from "../../../services/budgetsService";
 
-function AllBudgets() {
-  const [budgets, setBudgets] = useState([
-    { id: 1, name: "Food", spent: 425, limit: 500 },
-    { id: 2, name: "Transport", spent: 145, limit: 200 },
-    { id: 3, name: "Shopping", spent: 320, limit: 300 },
-  ]);
-
-  function handleDelete(id) {
-    setBudgets(budgets.filter((b) => b.id !== id));
+function AllBudgets({ budgets, setBudgets, userId }) {
+  async function handleDelete(id) {
+    await deleteBudget(userId, id);
+    setBudgets((prev) => prev.filter((b) => b.id !== id));
   }
 
-  function handleUpdate(id, newLimit) {
-    setBudgets(
-      budgets.map((b) =>
-        b.id === id ? { ...b, limit: Number(newLimit) } : b
-      )
+  async function handleUpdate(id, newLimit) {
+    const limitNum = Number(newLimit);
+    await updateBudget(userId, id, { monthlyLimit: limitNum });
+
+    setBudgets((prev) =>
+      prev.map((b) => (b.id === id ? { ...b, monthlyLimit: limitNum } : b))
     );
   }
 
@@ -26,10 +22,13 @@ function AllBudgets() {
       <h2 className="allBudgets_title">All Budgets</h2>
 
       <section className="allBudgets_grid">
-        {budgets.map((budget) => (
+        {budgets.map((b) => (
           <BudgetCard
-            key={budget.id}
-            {...budget}
+            key={b.id}
+            id={b.id}
+            name={b.name}
+            spent={0}
+            limit={b.monthlyLimit}
             onDelete={handleDelete}
             onUpdate={handleUpdate}
           />
