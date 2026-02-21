@@ -25,14 +25,12 @@ export default function Settings() {
     const wantsEmailChange = email.trim() !== (user.email || "");
     const wantsPasswordChange = newPassword.trim() !== "";
 
-    // ✅ Tip: prevent weak password BEFORE calling Firebase
     if (wantsPasswordChange && newPassword.length < 6) {
       setMessage("Password must be at least 6 characters");
       return;
     }
 
     try {
-      // Re-auth only if user is trying to update email/password
       if (wantsEmailChange || wantsPasswordChange) {
         if (!currentPassword) {
           setMessage("Please enter your current password");
@@ -53,19 +51,18 @@ export default function Settings() {
 
       setNewPassword("");
       setCurrentPassword("");
-      setMessage("Changes saved ✅");
+      setMessage("Changes saved ");
     } catch (err) {
       console.error("Firebase error:", err?.code, err?.message);
 
-      // Small friendly messages for common errors
       if (err?.code === "auth/wrong-password" || err?.code === "auth/invalid-credential") {
-        setMessage("Current password is incorrect ❌");
+        setMessage("Current password is incorrect ");
       } else if (err?.code === "auth/email-already-in-use") {
-        setMessage("This email is already in use ❌");
+        setMessage("This email is already in use ");
       } else if (err?.code === "auth/invalid-email") {
-        setMessage("Invalid email format ❌");
+        setMessage("Invalid email format ");
       } else {
-        setMessage(err?.code || "Error updating account ❌");
+        setMessage(err?.code || "Error updating account ");
       }
     }
   }
