@@ -8,6 +8,7 @@ import HomeIndex from "./pages/HomeIndex";
 import Budgets from "./pages/Budgets/Budgets";
 // import Transactions from "./pages/Transactions";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Settings from "./pages/Settings/Settings";
 
 const router = createBrowserRouter([
   { path: "/", element: <Login /> },
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
        //{ path: "goal", element: <Goal /> },
       { path: "budgets", element: <Budgets /> },
       // { path: "transactions", element: <Transactions /> },
+      { path: "settings", element: <Settings /> },
     ],
   },
 ]);
