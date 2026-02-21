@@ -1,0 +1,8 @@
+.budgets_container {
+  width: 100%;
+  text-align: left;
+
+  display: flex;          
+  flex-direction: column;  
+  align-items: stretch;  
+}  
