@@ -15,6 +15,9 @@ export default function HomeLayout() {
           <NavLink to="budgets" className={({ isActive }) => (isActive ? "link active" : "link")}>
             Budgets
           </NavLink>
+          <NavLink to="settings" className={({ isActive }) => (isActive ? "link active" : "link")}>
+            Settings
+          </NavLink> 
 
           {/*  */}
           {/* <NavLink to="transactions" className={({ isActive }) => (isActive ? "link active" : "link")}>
