@@ -32,10 +32,10 @@ async function handleLogout() {
             Settings
           </NavLink> 
 
-          {/*  */}
-          {/* <NavLink to="transactions" className={({ isActive }) => (isActive ? "link active" : "link")}>
+          
+          { <NavLink to="transactions" className={({ isActive }) => (isActive ? "link active" : "link")}>
             Transactions
-          </NavLink> */
+          </NavLink> 
           
           /*<NavLink to="goal" className={({ isActive }) => (isActive ? "link active" : "link")}>
             Savings Goal
