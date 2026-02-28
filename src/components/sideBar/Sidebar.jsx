@@ -19,7 +19,7 @@ export default function Sidebar() {
     <aside className="sidebar">
       <section className="sidebarBrand">
         <span className="brandLogo" />
-          <p className="brandTitle">Smart Expense</p>
+        <p className="brandTitle">Smart Expense</p>
       </section>
 
       <nav className="nav">
@@ -37,6 +37,10 @@ export default function Sidebar() {
 
         <NavLink to="/home/transactions" className={({ isActive }) => (isActive ? "navItem active" : "navItem")}>
           Transactions
+        </NavLink>
+
+        <NavLink to="/home/settings" className={({ isActive }) => (isActive ? "navItem active" : "navItem")}>
+          Settings
         </NavLink>
       </nav>
 
