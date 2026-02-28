@@ -1,0 +1,17 @@
+.homelayout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  background: #e4e6ea;
+}
+
+.appMain {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.content {
+  padding: 20px 24px 28px;
+  min-width: 0;
+}
