@@ -2,9 +2,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import HomeLayout from "./pages/layout/HomeLayout";
-//import Goal from "./pages/Goal";
-import HomeIndex from "./pages/HomeIndex";
+import HomeLayout from "./layout/HomeLayout";
+import Goal from "./pages/goal/Goal";
+import HomeIndex from "./pages/home/HomeIndex";
 import Budgets from "./pages/Budgets/Budgets";
 // import Transactions from "./pages/Transactions";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <HomeIndex /> },
-       //{ path: "goal", element: <Goal /> },
+      { path: "goal", element: <Goal /> },
       { path: "budgets", element: <Budgets /> },
       // { path: "transactions", element: <Transactions /> },
       { path: "settings", element: <Settings /> },
