@@ -1,0 +1,21 @@
+.appHeader {
+  background: #fafafa;
+  padding: 18px 24px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.appHeaderTitle {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.appHeaderSub {
+  margin: 6px 0 0;
+  font-size: 13px;
+  opacity: 0.7;
+}
