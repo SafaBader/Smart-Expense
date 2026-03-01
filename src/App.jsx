@@ -6,7 +6,7 @@ import HomeLayout from "./layout/HomeLayout";
 import Goal from "./pages/goal/Goal";
 import HomeIndex from "./pages/home/HomeIndex";
 import Budgets from "./pages/Budgets/Budgets";
-// import Transactions from "./pages/Transactions";
+import TransactionsPage from "./pages/Transactions/TransactionsPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Settings from "./pages/Settings/Settings";
 
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomeIndex /> },
       { path: "goal", element: <Goal /> },
       { path: "budgets", element: <Budgets /> },
-      // { path: "transactions", element: <Transactions /> },
+      { path: "transactions", element:<TransactionsPage/> },
       { path: "settings", element: <Settings /> },
     ],
   },
