@@ -12,8 +12,8 @@
     font-weight: 800;
     font-size: medium;
     background: rgba(0, 0, 0, 0.86);
-    color: #212121;
-    background-color: rgb(71, 222, 71);
+    color: white;
+    background-color:#0f172a;
 }
 
 .goalBtn.update {

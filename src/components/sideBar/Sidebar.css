@@ -10,10 +10,9 @@
 
 .sidebarBrand {
   display: flex;
-  gap: 20px;
   align-items: center;
-  padding: 8px 6px 14px;
-  border-bottom: 1px solid #eef0f3;
+  gap: 8px;
+  font-weight: 900;
 }
 
 .brandLogo {
@@ -62,4 +61,9 @@
   border-radius: 10px;
   cursor: pointer;
   font-weight: 900;
+}
+.logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
 }

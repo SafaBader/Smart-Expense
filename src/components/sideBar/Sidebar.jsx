@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import "../sideBar/Sidebar.css";
+import logo from "../../assets/SE-logo.png";
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -18,9 +19,10 @@ export default function Sidebar() {
   return (
     <aside className="sidebar">
       <section className="sidebarBrand">
-        <span className="brandLogo" />
-        <p className="brandTitle">Smart Expense</p>
+        <img src={logo} alt="SmartExpense" className="logo" />
+        <span>SmartExpense</span>
       </section>
+
 
       <nav className="nav">
         <NavLink to="/home" end className={({ isActive }) => (isActive ? "navItem active" : "navItem")}>
