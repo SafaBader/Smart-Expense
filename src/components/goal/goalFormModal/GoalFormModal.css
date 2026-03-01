@@ -1,0 +1,94 @@
+.gfOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    z-index: 40;
+}
+
+.gfModal {
+    width: min(560px, 100%);
+    background: #fff;
+    border-radius: 16px;
+    padding: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.gfHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gfTitle {
+    font-weight: 900;
+}
+
+.gfClose {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.gfForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.gfField {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.gfField span {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.gfField input {
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+.gfRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.gfActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.gfBtn {
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 0;
+    cursor: pointer;
+    font-weight: 900;
+}
+
+.gfBtn.ghost {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.gfBtn.primary {
+    background: rgba(0, 0, 0, 0.86);
+    color: #fff;
+}
+
+@media (max-width: 560px) {
+    .gfRow {
+        grid-template-columns: 1fr;
+    }
+}
