@@ -103,13 +103,13 @@ export default function HomeIndex() {
       </header>
 
       <section className="actions">
-        {/* <button className="actionBtn primary" onClick={() => navigate("/home/transactions")}>
-          + Add Expense / Saving
-        </button> */}
-
-        <button className="actionBtn primary" onClick={() => navigate("/home/budgets")}>
+        <button className="actionBtn primary" onClick={() => navigate("/home/transactions")}>
           + Add Expense / Saving
         </button>
+
+        {/* <button className="actionBtn primary" onClick={() => navigate("/home/budgets")}>
+          + Add Expense / Saving
+        </button> */}
 
         <button className="actionBtn success" onClick={() => navigate("/home/budgets")}>
           + View Budget
