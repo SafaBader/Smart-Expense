@@ -1,0 +1,236 @@
+.mpCard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mpHeaderRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.mpTitle {
+    font-weight: 900;
+}
+
+.mpStreak {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.mpStreakLabel {
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+.mpStreakValue {
+    font-weight: 900;
+}
+
+.mpFire {
+    display: inline-block;
+    transform: translateY(1px);
+}
+
+.mpBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.mpLabel {
+    font-size: 12px;
+    opacity: 0.75;
+}
+
+.mpBig {
+    font-size: 26px;
+    font-weight: 950;
+    letter-spacing: -0.3px;
+}
+
+.mpLine {
+    height: 1px;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.mpUpdateBox {
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mpUpdateTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.mpUpdateTitle {
+    font-weight: 900;
+    text-align: center;
+}
+
+.mpPill {
+    font-size: 12px;
+    font-weight: 800;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    background: rgba(0, 0, 0, 0.04);
+    white-space: nowrap;
+}
+
+.mpPill.achieved {
+    border-color: rgba(0, 128, 0, 0.25);
+    background: rgba(0, 128, 0, 0.08);
+}
+
+.mpPill.partial {
+    border-color: rgba(255, 165, 0, 0.35);
+    background: rgba(255, 165, 0, 0.12);
+}
+
+.mpPill.missing {
+    border-color: rgba(0, 0, 0, 0.12);
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.mpSavedMeta {
+    font-size: 12px;
+    opacity: 0.88;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.mpSavedMetaSep {
+    opacity: 0.5;
+}
+
+.mpInputRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.mpInputPrefix {
+    font-weight: 900;
+    opacity: 0.85;
+}
+
+.mpNumberInput {
+    width: 180px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    text-align: center;
+    font-weight: 900;
+    font-size: 18px;
+    outline: none;
+}
+
+.mpNumberInput:focus {
+    border-color: rgba(34, 197, 94, 0.9);
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+}
+
+
+
+
+.mpApplyBtn {
+    border: 0;
+    border-radius: 12px;
+    padding: 10px 12px;
+    cursor: pointer;
+    font-weight: 900;
+    background: rgba(0, 0, 0, 0.86);
+    color: #fff;
+}
+
+.mpHint {
+    font-size: 12px;
+    opacity: 0.85;
+}
+
+.mpYearDots {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 6px;
+    margin-top: 2px;
+}
+
+.mpDot {
+    height: 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.mpDot.achieved {
+    background: rgba(0, 128, 0, 0.55);
+    border-color: rgba(0, 128, 0, 0.25);
+}
+
+.mpDot.partial {
+    background: rgba(255, 165, 0, 0.75);
+    border-color: rgba(255, 165, 0, 0.35);
+}
+
+.mpDot.missing {
+    background: rgba(0, 0, 0, 0.10);
+    border-color: rgba(0, 0, 0, 0.12);
+}
+
+.mpDot.isCurrent {
+    outline: 2px solid rgba(0, 0, 0, 0.25);
+    outline-offset: 2px;
+}
+
+.mpDotsLegend {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    opacity: 0.85;
+}
+
+.lgItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.lgDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    display: inline-block;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+}
+
+.lgDot.achieved {
+    background: rgba(0, 128, 0, 0.55);
+    border-color: rgba(0, 128, 0, 0.25);
+}
+
+.lgDot.partial {
+    background: rgba(255, 165, 0, 0.75);
+    border-color: rgba(255, 165, 0, 0.35);
+}
+
+.lgDot.missing {
+    background: rgba(0, 0, 0, 0.10);
+    border-color: rgba(0, 0, 0, 0.12);
+}
