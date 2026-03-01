@@ -6,52 +6,70 @@ import AllBudgets from "../../components/Budgets/AllBudgets/AllBudgets";
 import SetBudgetModal from "../../components/Budgets/SetBudgetModal/SetBudgetModal";
 
 import { getBudgets, addBudget } from "../../services/budgetsService";
-import { auth } from "../../firebase/firebase";
+import { auth, db } from "../../firebase/firebase";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+
 function Budgets() {
   const userId = auth.currentUser?.uid;
+
   const [budgets, setBudgets] = useState([]);
+  const [transactions, setTransactions] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const mockTransactions = [
-    { type: "expense", amount: 200, categoryId: "Food" },
-    { type: "expense", amount: 120, categoryId: "Shopping" },
-    { type: "expense", amount: 80, categoryId: "Transport" },
-  ];
+  useEffect(() => {
+    if (!userId) return;
 
-  const transactions = mockTransactions; // TODO: replace with getTransactions(userId)
+    async function fetchData() {
+      const data = await getBudgets(userId);
+      setBudgets(data);
+    }
+    fetchData();
+  }, [userId]);
 
   useEffect(() => {
-  if (!userId) return;
+    if (!userId) {
+      setTransactions([]);
+      return;
+    }
 
-  async function fetchData() {
-    const data = await getBudgets(userId);
-    setBudgets(data);
+    const q = query(
+      collection(db, "users", userId, "transactions"),
+      orderBy("createdAt", "desc")
+    );
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const data = snapshot.docs.map((d) => ({
+        id: d.id,
+        ...d.data(),
+      }));
+      setTransactions(data);
+    });
+
+    return () => unsubscribe();
+  }, [userId]);
+
+  async function handleCreateBudget(newBudget) {
+    if (!userId) return;
+
+    await addBudget(userId, newBudget);
+    const updated = await getBudgets(userId);
+    setBudgets(updated);
   }
-  fetchData();
-}, [userId]);
 
- async function handleCreateBudget(newBudget) {
-  if (!userId) return;
-
-  await addBudget(userId, newBudget);
-  const updated = await getBudgets(userId);
-  setBudgets(updated);
-}
-
-    const spentMap = useMemo(() => {
+  const spentMap = useMemo(() => {
     const map = new Map();
 
     for (const t of transactions) {
       if (t.type !== "expense") continue;
 
-      const key = String(t.categoryId || "").toLowerCase();
+      const key = String(t.category || "").toLowerCase();
       const amount = Number(t.amount) || 0;
 
       map.set(key, (map.get(key) || 0) + amount);
     }
 
     return map;
-  }, [mockTransactions]);
+  }, [transactions]);
 
   const budgetsWithSpent = useMemo(() => {
     return budgets.map((b) => {
