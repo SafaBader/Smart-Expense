@@ -1,0 +1,15 @@
+.statTile {
+    padding: 14px;
+}
+
+.statLabel {
+    font-size: 12px;
+    opacity: 0.72;
+    font-weight: 700;
+}
+
+.statValue {
+    font-size: 22px;
+    font-weight: 950;
+    margin-top: 6px;
+}
