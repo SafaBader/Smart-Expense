@@ -1,0 +1,19 @@
+.goalGrid {
+    display: grid;
+    grid-template-columns: 1.35fr 0.85fr;
+    gap: 16px;
+    align-items: start;
+}
+
+.goalRightCol {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+}
+
+@media (max-width: 900px) {
+    .goalGrid {
+        grid-template-columns: 1fr;
+    }
+}

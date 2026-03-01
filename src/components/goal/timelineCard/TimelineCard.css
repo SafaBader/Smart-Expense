@@ -1,0 +1,34 @@
+.timelineCard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tlTitle {
+    font-weight: 900;
+}
+
+.tlBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.tlLabel {
+    font-size: 12px;
+    opacity: 0.75;
+}
+
+.tlValue {
+    font-weight: 800;
+}
+
+.tlDivider {
+    height: 1px;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.tlDays {
+    font-size: 26px;
+    font-weight: 900;
+}
