@@ -1,0 +1,10 @@
+.goalPage {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.goalLoading {
+  padding: 12px;
+}
