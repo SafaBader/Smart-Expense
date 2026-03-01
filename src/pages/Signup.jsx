@@ -14,6 +14,8 @@ import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
+import logo from '../assets/SE-LOGO.png';
+
 export default function Signup() {
   const navigate = useNavigate();
 
@@ -31,7 +33,7 @@ export default function Signup() {
   const validateInputs = () => {
     let isValid = true;
 
-    
+
     if (!email || !/\S+@\S+\.\S+/.test(email)) {
       setEmailError(true);
       setEmailErrorMessage("Please enter a valid email address.");
@@ -41,7 +43,7 @@ export default function Signup() {
       setEmailErrorMessage("");
     }
 
-   
+
     if (!password || password.length < 6) {
       setPasswordError(true);
       setPasswordErrorMessage("Password must be at least 6 characters long.");
@@ -68,7 +70,7 @@ export default function Signup() {
     try {
       await createUserWithEmailAndPassword(auth, email.trim(), password);
 
-      
+
       navigate("/home");
     } catch (error) {
       console.error("Signup error:", error);
@@ -96,7 +98,7 @@ export default function Signup() {
     <>
       <CssBaseline />
 
-     
+
       <Box
         sx={{
           minHeight: "100vh",
@@ -111,7 +113,7 @@ export default function Signup() {
           overflow: "hidden",
         }}
       >
-        
+
         <Box
           aria-hidden
           sx={{
@@ -127,7 +129,24 @@ export default function Signup() {
           }}
         />
 
-       
+        <Box
+          aria-hidden
+          component="img"
+          src={logo}
+          alt=""
+          sx={{
+            position: 'absolute',
+            left: { xs: -90, md: -70 },
+            bottom: { xs: -110, md: -90 },
+            width: { xs: 260, md: 360 },
+            opacity: 0.055,
+            filter: 'blur(2px)',
+            transform: 'rotate(10deg)',
+            pointerEvents: 'none',
+            userSelect: 'none',
+          }}
+        />
+
         <Box
           sx={{
             width: "100%",
@@ -140,7 +159,7 @@ export default function Signup() {
             alignItems: "stretch",
           }}
         >
-         
+
           <Card
             elevation={0}
             sx={{
@@ -188,7 +207,7 @@ export default function Signup() {
             </Typography>
           </Card>
 
-         
+
           <Card
             elevation={0}
             sx={{
@@ -202,7 +221,23 @@ export default function Signup() {
               backgroundColor: "rgba(255,255,255,0.85)",
             }}
           >
-            <Stack spacing={1} sx={{ mb: 2 }}>
+            <Stack spacing={1} sx={{ mb: 2, alignItems: 'center', textAlign: 'center' }}>
+              <Box
+                component="img"
+                src={logo}
+                alt="Smart Expense"
+                sx={{
+                  width: 120,
+                  height: 120,
+                  objectFit: 'contain',
+                  filter: 'drop-shadow(0px 10px 18px rgba(2,6,23,0.18))',
+                  animation: 'float 3.2s ease-in-out infinite',
+                  '@keyframes float': {
+                    '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                    '50%': { transform: 'translateY(-8px) rotate(1deg)' },
+                  },
+                }}
+              />
               <Typography
                 variant="h3"
                 sx={{

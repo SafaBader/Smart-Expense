@@ -20,7 +20,7 @@ export default function Sidebar() {
     <aside className="sidebar">
       <section className="sidebarBrand">
         <img src={logo} alt="SmartExpense" className="logo" />
-        <span>SmartExpense</span>
+        <span>Smart Expense</span>
       </section>
 
 

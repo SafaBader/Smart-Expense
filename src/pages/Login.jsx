@@ -15,6 +15,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase/firebase';
 import { onAuthStateChanged } from "firebase/auth";
 
+import logo from '../assets/SE-LOGO.png';
+
 export default function LogIn() {
   const navigate = useNavigate();
 
@@ -123,7 +125,23 @@ export default function LogIn() {
             pointerEvents: 'none',
           }}
         />
-
+        <Box
+          aria-hidden
+          component="img"
+          src={logo}
+          alt=""
+          sx={{
+            position: 'absolute',
+            right: { xs: -90, md: -70 },
+            bottom: { xs: -110, md: -90 },
+            width: { xs: 260, md: 360 },
+            opacity: 0.055,
+            filter: 'blur(2px)',
+            transform: 'rotate(-8deg)',
+            pointerEvents: 'none',
+            userSelect: 'none',
+          }}
+        />
         <Box
           sx={{
             width: '100%',
@@ -136,7 +154,7 @@ export default function LogIn() {
             alignItems: 'stretch',
           }}
         >
-          
+
           <Card
             elevation={0}
             sx={{
@@ -183,7 +201,7 @@ export default function LogIn() {
             </Typography>
           </Card>
 
-          
+
           <Card
             elevation={0}
             sx={{
@@ -197,7 +215,26 @@ export default function LogIn() {
               backgroundColor: 'rgba(255,255,255,0.85)',
             }}
           >
-            <Stack spacing={1} sx={{ mb: 2 }}>
+
+            <Stack spacing={1} sx={{ mb: 2, alignItems: 'center', textAlign: 'center' }}>
+              <Box
+                component="img"
+                src={logo}
+                alt="Smart Expense"
+                sx={{
+                  width: 120,
+                  height: 120,
+                  objectFit: 'contain',
+                  filter: 'drop-shadow(0px 10px 18px rgba(2,6,23,0.18))',
+                  animation: 'float 3.2s ease-in-out infinite',
+                  '@keyframes float': {
+                    '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                    '50%': { transform: 'translateY(-8px) rotate(-1deg)' },
+                  },
+                }}
+              />
+
+
               <Typography
                 variant="h3"
                 sx={{
