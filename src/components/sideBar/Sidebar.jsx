@@ -46,7 +46,7 @@ export default function Sidebar() {
         </NavLink>
       </nav>
 
-      <button className="logoutBtn" onClick={handleLogout}>
+      <button className="navItem logoutItem" onClick={handleLogout}>
         Logout
       </button>
     </aside>
