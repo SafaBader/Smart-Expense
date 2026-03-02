@@ -14,7 +14,7 @@ import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase/firebase';
 
-import logo from '../assets/SE-LOGO.png';
+import logo from '../assets/logo.png';
 
 export default function LogIn() {
   const navigate = useNavigate();

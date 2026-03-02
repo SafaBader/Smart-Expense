@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import "../sideBar/Sidebar.css";
-import logo from "../../assets/SE-logo.png";
+import logo from "../../assets/logo.png";
 
 export default function Sidebar() {
   const navigate = useNavigate();

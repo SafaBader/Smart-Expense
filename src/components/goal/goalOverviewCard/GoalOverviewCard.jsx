@@ -1,5 +1,5 @@
 import Card from "../card/Card";
-import StatTile from "../statTile/statTile";
+import StatTile from "../statTile/StatTile";
 import ProgressBar from "../progressBar/ProgressBar";
 import "./GoalOverviewCard.css";
 
