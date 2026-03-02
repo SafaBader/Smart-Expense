@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, setDoc, serverTimestamp, increment, arrayUnion } from "firebase/firestore";
+import {
+  doc, getDoc, setDoc, updateDoc, serverTimestamp, increment, arrayUnion,
+} from "firebase/firestore";
 import { auth, db } from "../../firebase/firebase";
 
 import GoalTopBar from "../../components/goal/goalTopBar/GoalTopBar";
@@ -48,7 +50,6 @@ export default function Goal() {
       } finally {
         if (alive) setLoading(false);
       }
-
     }
 
     loadGoal();
@@ -68,16 +69,16 @@ export default function Goal() {
       ...derived,
       updatedAt: serverTimestamp(),
       createdAt: goal?.createdAt || serverTimestamp(),
-
       streak: typeof goal?.streak === "number" ? goal.streak : 0,
-      monthlyStatusByMonth: goal?.monthlyStatusByMonth || {},
-      monthlySavedByMonth: goal?.monthlySavedByMonth || {}, 
-      activity: goal?.activity || [],
     };
 
     try {
       await setDoc(goalRef, payload, { merge: true });
-      setGoal(payload);
+      setGoal((prev) => ({
+        ...(prev || {}),
+        ...payload,
+      }));
+
       setOpenGoalForm(false);
     } catch (e) {
       console.error("Failed to save goal:", e);
@@ -98,7 +99,6 @@ export default function Goal() {
     const newSavedThisMonth = prevSavedThisMonth + amt;
 
     const expected = Number(goal.monthlySave || 0);
-
     const status = computeMonthlyStatus(newSavedThisMonth, expected);
 
     const prevStatus = goal?.monthlyStatusByMonth?.[monthKey];
@@ -107,9 +107,8 @@ export default function Goal() {
     const streakDelta = !wasAchievedBefore && isAchievedNow ? 1 : 0;
 
     const newCurrent = Number(goal.current || 0) + amt;
-
-    const next = { ...goal, current: newCurrent };
-    const derived = deriveGoalFields(next);
+    const nextForDerive = { ...goal, current: newCurrent };
+    const derived = deriveGoalFields(nextForDerive);
 
     const event = {
       month: monthKey,
@@ -121,25 +120,18 @@ export default function Goal() {
     };
 
     try {
-      await setDoc(
-        goalRef,
-        {
-          current: increment(amt),
-          ...derived,
-          updatedAt: serverTimestamp(),
-          lastUpdateAt: serverTimestamp(),
+      await updateDoc(goalRef, {
+        current: increment(amt),
+        ...derived,
+        updatedAt: serverTimestamp(),
+        lastUpdateAt: serverTimestamp(),
+        streak: increment(streakDelta),
 
-          streak: (goal.streak || 0) + streakDelta,
+        [`monthlySavedByMonth.${monthKey}`]: increment(amt),
+        [`monthlyStatusByMonth.${monthKey}`]: status,
 
-          [`monthlySavedByMonth.${monthKey}`]: increment(amt),
-
-          [`monthlyStatusByMonth.${monthKey}`]: status,
-
-          activity: arrayUnion(event),
-        },
-        { merge: true }
-      );
-
+        activity: arrayUnion(event),
+      });
       setGoal((prev) => {
         const base = prev || goal;
 

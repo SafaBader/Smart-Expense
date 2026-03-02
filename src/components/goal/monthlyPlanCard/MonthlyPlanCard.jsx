@@ -18,10 +18,11 @@ export default function MonthlyPlanCard({ goal, onApplyMonthlyUpdate }) {
       ? goal.monthlySave
       : calcMonthlySave(remaining, monthsLeft);
 
-  const monthKey = useMemo(() => getMonthKey(new Date()), []);
+  const monthKey = getMonthKey(new Date());
   const savedThisMonth = safeNumber(goal?.monthlySavedByMonth?.[monthKey]);
 
   const [deposit, setDeposit] = useState(0);
+
   const previewTotal = savedThisMonth + safeNumber(deposit);
   const previewStatus = computeStatus(previewTotal, monthlySave);
 
@@ -114,9 +115,8 @@ export default function MonthlyPlanCard({ goal, onApplyMonthlyUpdate }) {
         {dots.map((d) => (
           <section
             key={d.key}
-            className={`mpDot ${dotClass(d.status)} ${
-              d.key === monthKey ? "isCurrent" : ""
-            }`}
+            className={`mpDot ${dotClass(d.status)} ${d.key === monthKey ? "isCurrent" : ""
+              }`}
             title={`${monthName(d.monthIndex)}: ${prettyStatus(d.status)}`}
           />
         ))}
@@ -136,7 +136,6 @@ export default function MonthlyPlanCard({ goal, onApplyMonthlyUpdate }) {
     </Card>
   );
 }
-
 
 function safeNumber(v) {
   const n = Number(v);
@@ -195,7 +194,7 @@ function dotClass(s) {
 }
 
 function monthName(i) {
-  return ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][i];
+  return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][i];
 }
 
 function computeStatus(savedTotalThisMonth, expectedMonthly) {
