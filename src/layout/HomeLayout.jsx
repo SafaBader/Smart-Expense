@@ -26,10 +26,12 @@ export default function HomeLayout() {
       <Sidebar />
 
       <section className="appMain">
-        <AppHeader title={title} subtitle={subtitle}  />
-        
+        <AppHeader title={title} subtitle={subtitle} />
+
         <main className="content">
-          <Outlet />
+          <section className="contentInner">
+            <Outlet />
+          </section>
         </main>
       </section>
     </section>

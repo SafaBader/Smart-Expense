@@ -1,10 +1,29 @@
 .appHeader {
-  background: #fafafa;
-  padding: 18px 24px 8px;
+  background: linear-gradient(90deg,
+      rgba(240, 253, 244, 0.8),
+      rgba(255, 255, 255, 0.9),
+      rgba(254, 252, 232, 0.7));
+  padding: 18px 24px 12px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
+  border-bottom: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  backdrop-filter: blur(10px);
+  height: 90px;
+}
+
+.appHeader::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 24px;
+  right: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, #22c55e, #facc15);
+  opacity: 0.6;
 }
 
 .appHeaderTitle {
@@ -17,5 +36,5 @@
 .appHeaderSub {
   margin: 6px 0 0;
   font-size: 13px;
-  opacity: 0.7;
+  color: #64748b;
 }
