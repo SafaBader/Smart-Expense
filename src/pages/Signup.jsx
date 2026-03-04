@@ -241,6 +241,20 @@ export default function Signup() {
             }}
           >
             <Box sx={{ position: 'relative', zIndex: 1 }}>
+              <Button
+                component={RouterLink}
+                to="/"
+                variant="text"
+                sx={{
+                  alignSelf: 'flex-start',
+                  mb: 1,
+                  fontWeight: 800,
+                  textTransform: 'none',
+                }}
+              >
+                ← Back
+              </Button>
+
               <Stack spacing={1} sx={{ mb: 2, alignItems: 'center', textAlign: 'center' }}>
                 <Box
                   component="img"
@@ -379,7 +393,7 @@ export default function Signup() {
                   size="large"
                   fullWidth
                   component={RouterLink}
-                  to="/"
+                  to="/login"
                   sx={{
                     textDecoration: 'none',
                     borderRadius: 3,
