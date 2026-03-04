@@ -54,7 +54,7 @@ export default function TransactionsPage() {
   const [form, setForm] = useState({
     date: new Date().toISOString().slice(0, 10), // today date
     type: "expense",
-    category: "Other",
+    category: "",
     note: "",
     amount: "",
   });
@@ -170,11 +170,6 @@ export default function TransactionsPage() {
   return (
     <div className="tx-page">
       <div className="tx-top">
-        <div>
-          <h1 className="tx-title">Transactions</h1>
-          <p className="tx-sub">Track all your income and expenses</p>
-        </div>
-
         <button className="tx-btn" onClick={() => setOpen(true)}>
           <span className="tx-plus">+</span> Add Transaction
         </button>

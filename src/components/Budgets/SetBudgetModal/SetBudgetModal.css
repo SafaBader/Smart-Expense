@@ -6,50 +6,62 @@
   place-items: center;
   padding: 24px;
   z-index: 50;
+  box-sizing: border-box;
 }
 
 .setBudgetModal_card {
   width: 100%;
   max-width: 520px;
   background: white;
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 18px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid rgba(2, 6, 23, 0.10);
+  box-sizing: border-box;
+  max-height: min(78dvh, 720px);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .setBudgetModal_header {
   display: flex;
   justify-content: space-between;
-  align-items: start;
+  align-items: flex-start;
   gap: 12px;
   margin-bottom: 12px;
+  min-width: 0;
 }
 
 .setBudgetModal_titles {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0;
 }
 
 .setBudgetModal_title {
   margin: 0;
-  font-size: 22px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 900;
   color: #111827;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .setBudgetModal_subtitle {
   margin: 0;
   font-size: 13px;
   color: #6b7280;
+  overflow-wrap: anywhere;
 }
 
 .setBudgetModal_close {
   border: none;
   background: transparent;
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
   color: #6b7280;
+  flex: 0 0 auto;
 }
 
 .setBudgetModal_label {
@@ -57,7 +69,7 @@
   gap: 8px;
   font-size: 12px;
   color: #111827;
-  font-weight: 700;
+  font-weight: 800;
   margin-top: 12px;
 }
 
@@ -65,52 +77,93 @@
 .setBudgetModal_input {
   width: 100%;
   padding: 12px 12px;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  border: 1px solid rgba(2, 6, 23, 0.14);
   outline: none;
   font-size: 14px;
   box-sizing: border-box;
+  background: #fff;
 }
 
 .setBudgetModal_select:focus,
 .setBudgetModal_input:focus {
-  border-color: #10b981;
+  border-color: rgba(34, 197, 94, 0.85);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.14);
 }
 
 .setBudgetModal_footer {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
+  justify-content: flex-end;
   gap: 10px;
   margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.setBudgetModal_primary,
+.setBudgetModal_secondary {
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 15px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  white-space: nowrap;
 }
 
 .setBudgetModal_primary {
-  background: #111827;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 14px;
-  cursor: pointer;
-  font-weight: 700;
+  background: #0f172a;
+  color: #fff;
+}
+
+.setBudgetModal_primary:hover {
+  transform: translateY(-1px);
 }
 
 .setBudgetModal_primary:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
 }
 
 .setBudgetModal_secondary {
-  background: white;
-  color: #111827;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  padding: 12px 14px;
-  cursor: pointer;
-  font-weight: 700;
+  background: rgba(0, 0, 0, 0.08);
+  color: #0f172a;
+}
+
+.setBudgetModal_secondary:hover {
+  transform: translateY(-1px);
 }
 
 .setBudgetModal_input::-webkit-outer-spin-button,
 .setBudgetModal_input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+@media (max-width: 560px) {
+  .setBudgetModal_overlay {
+    padding: 12px;
+  }
+
+  .setBudgetModal_card {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .setBudgetModal_title {
+    font-size: 18px;
+  }
+
+  .setBudgetModal_footer {
+    justify-content: stretch;
+  }
+
+  .setBudgetModal_primary,
+  .setBudgetModal_secondary {
+    width: 100%;
+    text-align: center;
+    padding: 11px;
+    font-size: 15px;
+  }
 }

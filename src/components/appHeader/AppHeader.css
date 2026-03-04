@@ -12,7 +12,8 @@
   background-clip: padding-box;
   position: relative;
   backdrop-filter: blur(10px);
-  height: 90px;
+  min-height: 90px;
+  box-sizing: border-box;
 }
 
 .appHeader::after {
@@ -28,13 +29,54 @@
 
 .appHeaderTitle {
   margin: 0;
-  font-size: 24px;
+  font-size: clamp(20px, 2vw, 26px);
   font-weight: 900;
   color: #0f172a;
+  line-height: 1.1;
+  word-break: break-word;
 }
 
 .appHeaderSub {
   margin: 6px 0 0;
-  font-size: 13px;
+  font-size: clamp(12px, 1vw, 14px);
   color: #64748b;
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .appHeader {
+    padding: 16px 18px 10px;
+    min-height: 76px;
+  }
+
+  .appHeader::after {
+    left: 18px;
+    right: 18px;
+  }
+}
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menuBtn {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .menuBtn {
+    display: flex;
+  }
+}
+@media (max-width: 480px) {
+  .appHeader {
+    padding: 14px 14px 8px;
+    min-height: 70px;
+  }
+
+  .appHeader::after {
+    left: 14px;
+    right: 14px;
+  }
 }

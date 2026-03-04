@@ -93,10 +93,10 @@ export default function LogIn() {
 
       <Box
         sx={{
-          minHeight: '100vh',
+          minHeight: '100dvh',
           display: 'grid',
           placeItems: 'center',
-          p: 2,
+          p: { xs: 1.5, sm: 2 },
           position: 'relative',
           overflow: 'hidden',
           background:
@@ -113,16 +113,15 @@ export default function LogIn() {
           sx={{
             position: 'absolute',
             inset: 0,
-            opacity: 0.22,
+            opacity: { xs: 0.18, sm: 0.22 },
             backgroundImage:
               'linear-gradient(rgba(2,6,23,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(2,6,23,0.06) 1px, transparent 1px)',
-            backgroundSize: '44px 44px',
+            backgroundSize: { xs: '38px 38px', sm: '44px 44px' },
             maskImage:
               'radial-gradient(circle at 50% 35%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%)',
             pointerEvents: 'none',
           }}
         />
-
 
         <Box
           aria-hidden
@@ -131,14 +130,15 @@ export default function LogIn() {
           alt=""
           sx={{
             position: 'absolute',
-            right: { xs: -90, md: -70 },
-            bottom: { xs: -110, md: -90 },
-            width: { xs: 260, md: 360 },
+            right: { xs: -110, sm: -95, md: -70 },
+            bottom: { xs: -140, sm: -120, md: -90 },
+            width: { xs: 240, sm: 280, md: 360 },
             opacity: 0.05,
             filter: 'blur(2px)',
             transform: 'rotate(-8deg)',
             pointerEvents: 'none',
             userSelect: 'none',
+            maxWidth: 'none',
           }}
         />
 
@@ -150,11 +150,10 @@ export default function LogIn() {
             zIndex: 1,
             display: 'grid',
             gridTemplateColumns: { xs: '1fr', md: '0.85fr 1.15fr' },
-            gap: 2,
+            gap: { xs: 1.5, sm: 2 },
             alignItems: 'stretch',
           }}
         >
-
           <Card
             elevation={0}
             sx={{
@@ -171,6 +170,7 @@ export default function LogIn() {
                 '0 14px 40px rgba(2, 6, 23, 0.08), 0 2px 10px rgba(2, 6, 23, 0.04)',
               position: 'relative',
               overflow: 'hidden',
+              minHeight: 520,
               '&::after': {
                 content: '""',
                 position: 'absolute',
@@ -193,8 +193,8 @@ export default function LogIn() {
                 Spend smarter.
               </Typography>
               <Typography color="text.secondary">
-                Smart Expense helps you organize every transaction, control your budget,
-                and stay focused on reaching the financial goals you set for yourself.
+                Smart Expense helps you organize every transaction, control your budget, and stay
+                focused on reaching the financial goals you set for yourself.
               </Typography>
 
               <Stack spacing={1.25} sx={{ mt: 3 }}>
@@ -213,17 +213,20 @@ export default function LogIn() {
               </Stack>
             </Box>
 
-            <Typography sx={{ position: 'relative', zIndex: 1 }} variant="caption" color="text.secondary">
+            <Typography
+              sx={{ position: 'relative', zIndex: 1 }}
+              variant="caption"
+              color="text.secondary"
+            >
               © {new Date().getFullYear()} Smart Expense
             </Typography>
           </Card>
 
-
           <Card
             elevation={0}
             sx={{
-              p: { xs: 3, sm: 4 },
-              borderRadius: 4,
+              p: { xs: 2.25, sm: 4 },
+              borderRadius: { xs: 3, sm: 4 },
               border: '1px solid',
               borderColor: 'rgba(2,6,23,0.10)',
               boxShadow:
@@ -241,8 +244,9 @@ export default function LogIn() {
                 content: '""',
                 position: 'absolute',
                 inset: -2,
-                background: 'linear-gradient(90deg, rgba(34,197,94,0.35), rgba(250,204,21,0.28))',
-                filter: 'blur(18px)',
+                background:
+                  'linear-gradient(90deg, rgba(34,197,94,0.35), rgba(250,204,21,0.28))',
+                filter: { xs: 'blur(14px)', sm: 'blur(18px)' },
                 opacity: 0.55,
                 zIndex: 0,
                 animation: 'glow 2.8s ease-in-out infinite',
@@ -260,8 +264,8 @@ export default function LogIn() {
                   src={logo}
                   alt="Smart Expense"
                   sx={{
-                    width: 92,
-                    height: 92,
+                    width: { xs: 76, sm: 92 },
+                    height: { xs: 76, sm: 92 },
                     objectFit: 'contain',
                     filter: 'drop-shadow(0px 12px 22px rgba(2,6,23,0.18))',
                     animation: 'float 2.8s ease-in-out infinite',
@@ -276,19 +280,25 @@ export default function LogIn() {
                   variant="h3"
                   sx={{
                     fontWeight: 900,
-                    letterSpacing: 1,
+                    letterSpacing: { xs: 0.5, sm: 1 },
                     background: 'linear-gradient(90deg, #16a34a, #22c55e, #facc15)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     lineHeight: 1.05,
+                    fontSize: { xs: 36, sm: 48, md: 56 },
+                    wordBreak: 'break-word',
                   }}
                 >
                   Smart Expense
                 </Typography>
 
-                <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 420 }}>
-                  Organize your transactions, manage your budget, and move closer to the
-                  financial goals that matter to you.
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ maxWidth: 420, px: { xs: 0.5, sm: 0 } }}
+                >
+                  Organize your transactions, manage your budget, and move closer to the financial
+                  goals that matter to you.
                 </Typography>
               </Stack>
 
@@ -333,7 +343,6 @@ export default function LogIn() {
                   />
                 </FormControl>
 
-
                 <Button
                   type="submit"
                   variant="contained"
@@ -354,7 +363,6 @@ export default function LogIn() {
                   {loading ? 'Logging in…' : 'Log in'}
                 </Button>
 
-
                 <Divider
                   sx={{
                     my: 1,
@@ -367,7 +375,6 @@ export default function LogIn() {
                 >
                   OR
                 </Divider>
-
 
                 <Button
                   variant="outlined"
@@ -427,10 +434,10 @@ function BlobLayer() {
         zIndex: 0,
         '& .blob': {
           position: 'absolute',
-          width: { xs: 320, md: 520 },
-          height: { xs: 320, md: 520 },
+          width: { xs: 260, sm: 320, md: 520 },
+          height: { xs: 260, sm: 320, md: 520 },
           borderRadius: '40% 60% 55% 45% / 45% 45% 55% 55%',
-          filter: 'blur(28px)',
+          filter: { xs: 'blur(22px)', sm: 'blur(28px)' },
           opacity: 0.55,
           mixBlendMode: 'multiply',
         },
@@ -439,8 +446,8 @@ function BlobLayer() {
       <Box
         className="blob"
         sx={{
-          top: { xs: -120, md: -160 },
-          left: { xs: -140, md: -160 },
+          top: { xs: -140, sm: -120, md: -160 },
+          left: { xs: -170, sm: -140, md: -160 },
           background: 'radial-gradient(circle at 30% 30%, rgba(34,197,94,0.72), transparent 60%)',
           animation: 'blobA 9s ease-in-out infinite',
           '@keyframes blobA': {
@@ -452,8 +459,8 @@ function BlobLayer() {
       <Box
         className="blob"
         sx={{
-          top: { xs: 60, md: 80 },
-          right: { xs: -160, md: -220 },
+          top: { xs: 30, sm: 60, md: 80 },
+          right: { xs: -210, sm: -160, md: -220 },
           background: 'radial-gradient(circle at 40% 35%, rgba(250,204,21,0.62), transparent 60%)',
           animation: 'blobB 10.5s ease-in-out infinite',
           '@keyframes blobB': {
@@ -465,8 +472,8 @@ function BlobLayer() {
       <Box
         className="blob"
         sx={{
-          bottom: { xs: -170, md: -220 },
-          left: { xs: 60, md: 140 },
+          bottom: { xs: -210, sm: -170, md: -220 },
+          left: { xs: 10, sm: 60, md: 140 },
           background: 'radial-gradient(circle at 45% 40%, rgba(16,185,129,0.55), transparent 60%)',
           animation: 'blobC 12s ease-in-out infinite',
           '@keyframes blobC': {
@@ -488,11 +495,11 @@ function ParticlesLayer() {
         inset: 0,
         pointerEvents: 'none',
         zIndex: 0,
-        opacity: 0.42,
+        opacity: { xs: 0.32, sm: 0.42 },
         backgroundImage:
           'radial-gradient(circle, rgba(2,6,23,0.10) 1px, transparent 1.2px),' +
           'radial-gradient(circle, rgba(2,6,23,0.08) 1px, transparent 1.2px)',
-        backgroundSize: '40px 40px, 70px 70px',
+        backgroundSize: { xs: '34px 34px, 60px 60px', sm: '40px 40px, 70px 70px' },
         backgroundPosition: '0 0, 10px 15px',
         animation: 'drift 18s linear infinite',
         '@keyframes drift': {

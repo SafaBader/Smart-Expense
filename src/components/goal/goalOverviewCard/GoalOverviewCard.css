@@ -4,13 +4,15 @@
     gap: 14px;
     height: auto;
     min-height: 0;
+    min-width: 0;
 }
 
 .goalCardHeader {
     display: grid;
-    grid-template-columns: 40px 1fr auto;
+    grid-template-columns: 40px minmax(0, 1fr) auto;
     align-items: center;
     gap: 12px;
+    min-width: 0;
 }
 
 .goalIcon {
@@ -21,25 +23,32 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     font-size: 20px;
+    flex: 0 0 auto;
 }
 
 .goalHeaderText {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    min-width: 0;
 }
 
 .goalTitle {
     font-weight: 900;
     font-size: 20px;
     line-height: 1.1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .goalSub {
     font-size: 13px;
     opacity: 0.78;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .goalStatusPill {
@@ -58,7 +67,7 @@
     border: 3px solid rgba(0, 0, 0, 0.08);
     background: rgba(0, 0, 0, 0.03);
     text-align: center;
-
+    min-width: 0;
 }
 
 .goalHeroLabel {
@@ -68,49 +77,47 @@
 }
 
 .goalHeroValue {
-    font-size: 34px;
+    font-size: clamp(24px, 5vw, 34px);
     font-weight: 950;
     letter-spacing: -0.5px;
     margin-top: 2px;
-
+    overflow-wrap: anywhere;
 }
 
 .goalHeroMeta {
     font-size: 12px;
     opacity: 0.75;
     margin-top: 4px;
+    overflow-wrap: anywhere;
 }
 
 .goalCardBody {
     display: flex;
     flex-direction: column;
     gap: 14px;
-
+    min-width: 0;
 }
 
 .statsRow {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
-}
-
-@media (max-width: 900px) {
-    .statsRow {
-        grid-template-columns: 1fr;
-    }
 }
 
 .progressWrap {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    min-width: 0;
 }
 
 .progressMeta {
     display: flex;
     justify-content: space-between;
+    gap: 10px;
     font-size: 12px;
     opacity: 0.82;
+    flex-wrap: wrap;
 }
 
 .goalInsights {
@@ -126,14 +133,8 @@
 
 .insGrid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
-}
-
-@media (max-width: 900px) {
-    .insGrid {
-        grid-template-columns: 1fr;
-    }
 }
 
 .insItem {
@@ -141,6 +142,7 @@
     border-radius: 14px;
     padding: 12px;
     background: rgba(255, 255, 255, 0.65);
+    min-width: 0;
 }
 
 .insLabel {
@@ -153,10 +155,48 @@
     font-size: 18px;
     font-weight: 950;
     margin-top: 4px;
+    overflow-wrap: anywhere;
 }
 
 .insSub {
     font-size: 12px;
     opacity: 0.72;
     margin-top: 2px;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+    .statsRow {
+        grid-template-columns: 1fr;
+    }
+
+    .insGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    .goalCardHeader {
+        grid-template-columns: 40px minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        row-gap: 10px;
+    }
+
+    .goalStatusPill {
+        grid-column: 1 / -1;
+        justify-self: flex-start;
+        white-space: normal;
+    }
+
+    .goalTitle,
+    .goalSub {
+        white-space: normal;
+    }
+}
+
+@media (max-width: 420px) {
+    .goalHeroRow {
+        padding: 12px;
+        border-radius: 14px;
+    }
 }
