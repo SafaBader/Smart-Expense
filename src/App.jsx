@@ -9,9 +9,11 @@ import Budgets from "./pages/Budgets/Budgets";
 import TransactionsPage from "./pages/Transactions/TransactionsPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Settings from "./pages/Settings/Settings";
+import Landing from "./pages/landing/Landing";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Login /> },
+  { path: "/", element: <Landing /> },
+  { path: "/login", element: <Login /> },
   { path: "/signup", element: <Signup /> },
 
   {
@@ -25,7 +27,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomeIndex /> },
       { path: "goal", element: <Goal /> },
       { path: "budgets", element: <Budgets /> },
-      { path: "transactions", element:<TransactionsPage/> },
+      { path: "transactions", element: <TransactionsPage /> },
       { path: "settings", element: <Settings /> },
     ],
   },
