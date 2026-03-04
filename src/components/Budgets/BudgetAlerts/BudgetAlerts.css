@@ -1,4 +1,5 @@
 .budgetAlerts_container {
+  width: 100%;
   border: 2px solid #f6d365;
   background: #fffdf6;
   border-radius: 14px;
@@ -6,10 +7,16 @@
   margin-top: 16px;
   margin-bottom: 18px;
   text-align: left;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .budgetAlerts_header {
   margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
 }
 
 .budgetAlerts_title {
@@ -20,9 +27,10 @@
 }
 
 .budgetAlerts_subtitle {
-  margin: 6px 0 0;
+  margin: 0;
   font-size: 12px;
   color: #6b7280;
+  overflow-wrap: anywhere;
 }
 
 .budgetAlerts_list {
@@ -31,6 +39,8 @@
   margin: 0;
   display: grid;
   gap: 10px;
+  width: 100%;
+  min-width: 0;
 }
 
 .budgetAlerts_item {
@@ -38,6 +48,12 @@
   padding: 12px;
   border: 1px solid #fde68a;
   background: #fffbeb;
+  min-width: 0;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.budgetAlerts_item:hover {
+  transform: translateY(-1px);
 }
 
 .budgetAlerts_exceeded {
@@ -60,6 +76,7 @@
   font-weight: 800;
   font-size: 13px;
   color: #111827;
+  overflow-wrap: anywhere;
 }
 
 .budgetAlerts_itemText {
@@ -67,11 +84,15 @@
   font-size: 12px;
   color: #6b7280;
   line-height: 1.35;
+  overflow-wrap: anywhere;
 }
+
 .budgetAlerts_itemHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
+  min-width: 0;
 }
 
 .budgetAlerts_closeBtn {
@@ -80,11 +101,32 @@
   font-size: 16px;
   cursor: pointer;
   color: #6b7280;
+  flex: 0 0 auto;
 }
 
 .budgetAlerts_closeBtn:hover {
   color: #dc2626;
 }
-.budgetAlerts_item {
-  transition: opacity 0.2s ease;
+
+@media (min-width: 900px) {
+  .budgetAlerts_list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .budgetAlerts_container {
+    padding: 14px;
+    margin-top: 12px;
+    margin-bottom: 14px;
+  }
+
+  .budgetAlerts_title {
+    font-size: 15px;
+  }
+
+  .budgetAlerts_item {
+    padding: 11px;
+  }
 }

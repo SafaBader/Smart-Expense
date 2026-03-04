@@ -7,6 +7,7 @@
     justify-content: center;
     padding: 14px;
     z-index: 40;
+    box-sizing: border-box;
 }
 
 .gfModal {
@@ -15,16 +16,26 @@
     border-radius: 16px;
     padding: 14px;
     border: 1px solid rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    max-height: min(78dvh, 720px);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .gfHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
+    min-width: 0;
 }
 
 .gfTitle {
     font-weight: 900;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
 }
 
 .gfClose {
@@ -32,6 +43,7 @@
     background: transparent;
     cursor: pointer;
     font-size: 18px;
+    flex: 0 0 auto;
 }
 
 .gfForm {
@@ -48,19 +60,28 @@
 }
 
 .gfField span {
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 700;
 }
 
 .gfField input {
-    padding: 10px;
+    padding: 10px 12px;
     border-radius: 12px;
     border: 1px solid rgba(0, 0, 0, 0.14);
+    outline: none;
+    font-size: 14px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.gfField input:focus {
+    border-color: rgba(34, 197, 94, 0.85);
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.14);
 }
 
 .gfRow {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
 }
 
@@ -68,6 +89,7 @@
     display: flex;
     justify-content: flex-end;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .gfBtn {
@@ -75,20 +97,59 @@
     border-radius: 12px;
     border: 0;
     cursor: pointer;
-    font-weight: 900;
+    font-weight: 800;
+    font-size: 15px;
+    min-width: 120px;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+    white-space: nowrap;
+}
+
+.gfBtn:hover {
+    transform: translateY(-1px);
 }
 
 .gfBtn.ghost {
     background: rgba(0, 0, 0, 0.08);
+    color: #0f172a;
 }
 
 .gfBtn.primary {
-    background: rgba(0, 0, 0, 0.86);
+    background: #0f172a;
     color: #fff;
+}
+
+@media (max-width: 900px) {
+    .gfBtn {
+        font-size: 14px;
+        padding: 9px 12px;
+    }
 }
 
 @media (max-width: 560px) {
     .gfRow {
         grid-template-columns: 1fr;
+    }
+
+    .gfBtn {
+        width: 100%;
+        min-width: 0;
+        text-align: center;
+        padding: 11px;
+        font-size: 15px;
+    }
+
+    .gfActions {
+        justify-content: stretch;
+    }
+}
+
+@media (max-width: 420px) {
+    .gfOverlay {
+        padding: 10px;
+    }
+
+    .gfModal {
+        padding: 12px;
+        border-radius: 14px;
     }
 }

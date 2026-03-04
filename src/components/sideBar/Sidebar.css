@@ -1,41 +1,54 @@
 .sidebar {
-  background: linear-gradient(180deg,
-      rgba(240, 253, 244, 0.95),
-      rgba(255, 255, 255, 0.9));
+  background: linear-gradient(180deg, rgba(240, 253, 244, 0.95), rgba(255, 255, 255, 0.9));
   border-right: 1px solid rgba(2, 6, 23, 0.08);
   padding: 16px;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   backdrop-filter: blur(10px);
+  box-sizing: border-box;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .sidebarBrand {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 8px;
   font-weight: 900;
   padding: 8px 6px 14px;
   border-bottom: 1px solid rgba(2, 6, 23, 0.06);
+  min-width: 0;
 }
 
 .logo {
-  width: 90px;
-  height: 80px;
+  width: 70px;
+  height: 56px;
   object-fit: contain;
+  flex: 0 0 auto;
 }
 
 .sidebarBrand span {
   font-weight: 900;
   color: #0f172a;
-  font-size: 20px;
+  font-size: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
 }
+
 
 .nav {
   padding: 14px 0;
   display: flex;
   flex-direction: column;
   gap: 6px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  -webkit-overflow-scrolling: touch;
+
 }
 
 .navItem {
@@ -48,11 +61,12 @@
   align-items: center;
   gap: 10px;
   transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+  min-width: 0;
 }
 
 .navItem:hover {
   background: rgba(59, 130, 246, 0.08);
-  transform: translateX(2px);
+  transform: scale(1.01);
 }
 
 .navItem.active {
@@ -74,4 +88,11 @@
 
 .logoutItem:hover {
   background: rgba(239, 68, 68, 0.08);
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    height: 100%;
+    min-height: 100dvh;
+  }
 }

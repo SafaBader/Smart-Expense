@@ -6,7 +6,7 @@ export default function GoalFormModal({ open, onClose, initialGoal, onSave }) {
     const [description, setDescription] = useState("");
     const [current, setCurrent] = useState("");
     const [target, setTarget] = useState("");
-    const [targetDate, setTargetDate] = useState(""); // YYYY-MM-DD
+    const [targetDate, setTargetDate] = useState("");
 
     useEffect(() => {
         if (!open) return;
@@ -16,15 +16,11 @@ export default function GoalFormModal({ open, onClose, initialGoal, onSave }) {
         setDescription(initialGoal?.description ?? "Your savings journey");
 
         setCurrent(
-            initialGoal?.current === 0 || initialGoal?.current
-                ? String(initialGoal.current)
-                : ""
+            initialGoal?.current === 0 || initialGoal?.current ? String(initialGoal.current) : ""
         );
 
         setTarget(
-            initialGoal?.target === 0 || initialGoal?.target
-                ? String(initialGoal.target)
-                : ""
+            initialGoal?.target === 0 || initialGoal?.target ? String(initialGoal.target) : ""
         );
 
         setTargetDate(normalizeToYYYYMMDD(initialGoal?.targetDate) || "");
@@ -38,7 +34,6 @@ export default function GoalFormModal({ open, onClose, initialGoal, onSave }) {
         if (!String(name).trim()) return alert("Goal name is required.");
         if (!targetDate) return alert("Target date is required.");
         if (Number(target) <= 0) return alert("Target amount must be > 0.");
-
         if (typeof onSave !== "function") return;
 
         onSave({
@@ -55,18 +50,23 @@ export default function GoalFormModal({ open, onClose, initialGoal, onSave }) {
     };
 
     return (
-
         <section className="gfOverlay" onClick={handleOverlayClick}>
             <section className="gfModal" onClick={(e) => e.stopPropagation()}>
                 <section className="gfHeader">
                     <section className="gfTitle">{initialGoal ? "Update Goal" : "Add Goal"}</section>
-                    <button type="button" className="gfClose" onClick={onClose}>✕</button>
+                    <button type="button" className="gfClose" onClick={onClose}>
+                        ✕
+                    </button>
                 </section>
 
                 <form className="gfForm" onSubmit={submit}>
                     <label className="gfField">
                         <span>Name</span>
-                        <input value={name || ""} onChange={(e) => setName(e.target.value)} placeholder="Your Goal" />
+                        <input
+                            value={name || ""}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Your Goal"
+                        />
                     </label>
 
                     <label className="gfField">
@@ -77,7 +77,11 @@ export default function GoalFormModal({ open, onClose, initialGoal, onSave }) {
                     <section className="gfRow">
                         <label className="gfField">
                             <span>Current</span>
-                            <input type="number" value={current || ""} onChange={(e) => setCurrent(e.target.value)} />
+                            <input
+                                type="number"
+                                value={current || ""}
+                                onChange={(e) => setCurrent(e.target.value)}
+                            />
                         </label>
 
                         <label className="gfField">
@@ -88,16 +92,24 @@ export default function GoalFormModal({ open, onClose, initialGoal, onSave }) {
 
                     <label className="gfField">
                         <span>Target date</span>
-                        <input type="date" value={targetDate || ""} onChange={(e) => setTargetDate(e.target.value)} />
+                        <input
+                            type="date"
+                            value={targetDate || ""}
+                            onChange={(e) => setTargetDate(e.target.value)}
+                        />
                     </label>
 
                     <section className="gfActions">
-                        <button type="button" className="gfBtn ghost" onClick={onClose}>Cancel</button>
-                        <button type="submit" className="gfBtn primary">Save</button>
+                        <button type="button" className="gfBtn ghost" onClick={onClose}>
+                            Cancel
+                        </button>
+                        <button type="submit" className="gfBtn primary">
+                            Save
+                        </button>
                     </section>
                 </form>
             </section>
-            /</section>
+        </section>
     );
 }
 

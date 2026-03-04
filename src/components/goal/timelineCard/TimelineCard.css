@@ -2,25 +2,33 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    min-width: 0;
 }
 
 .tlTitle {
     font-weight: 900;
+    overflow-wrap: anywhere;
 }
 
 .tlBlock {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    gap: 10px;
+    min-width: 0;
 }
 
 .tlLabel {
     font-size: 12px;
     opacity: 0.75;
+    flex: 0 0 auto;
 }
 
 .tlValue {
     font-weight: 800;
+    text-align: right;
+    overflow-wrap: anywhere;
+    min-width: 0;
 }
 
 .tlDivider {
@@ -29,6 +37,20 @@
 }
 
 .tlDays {
-    font-size: 26px;
+    font-size: clamp(20px, 3vw, 26px);
     font-weight: 900;
+    text-align: right;
+    min-width: 0;
+}
+
+@media (max-width: 520px) {
+    .tlBlock {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tlValue,
+    .tlDays {
+        text-align: left;
+    }
 }

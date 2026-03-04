@@ -8,6 +8,7 @@ import SetBudgetModal from "../../components/Budgets/SetBudgetModal/SetBudgetMod
 import { getBudgets, addBudget } from "../../services/budgetsService";
 import { auth, db } from "../../firebase/firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import "./Budgets.css";
 
 function Budgets() {
   const userId = auth.currentUser?.uid;
@@ -28,6 +29,7 @@ function Budgets() {
 
   useEffect(() => {
     if (!userId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTransactions([]);
       return;
     }
@@ -124,17 +126,13 @@ function Budgets() {
   }, [budgetsWithSpent]);
 
   return (
-    <main>
+    <main className="budgets_container">
       <HeaderBudget onSetBudgetClick={() => setIsModalOpen(true)} />
 
       <SummaryBudgets totals={totals} />
       <BudgetAlerts alerts={alerts} />
 
-      <AllBudgets
-        budgets={budgetsWithSpent}
-        setBudgets={setBudgets}
-        userId={userId}
-      />
+      <AllBudgets budgets={budgetsWithSpent} setBudgets={setBudgets} userId={userId} />
 
       <SetBudgetModal
         isOpen={isModalOpen}
