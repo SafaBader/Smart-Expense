@@ -11,16 +11,30 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 const headerMap = [
   { match: /^\/home\/?$/, title: "Home", subtitle: "Your daily snapshot" },
-  { match: /^\/home\/goal\/?$/, title: "Savings Goal", subtitle: "Track your progress" },
-  { match: /^\/home\/budgets\/?$/, title: "Budgets", subtitle: "Plan and control spending" },
-  { match: /^\/home\/transactions\/?$/, title: "Transactions", subtitle: "Review your history" },
+  {
+    match: /^\/home\/goal\/?$/,
+    title: "Savings Goal",
+    subtitle: "Track your progress",
+  },
+  {
+    match: /^\/home\/budgets\/?$/,
+    title: "Budgets",
+    subtitle: "Plan and control spending",
+  },
+  {
+    match: /^\/home\/transactions\/?$/,
+    title: "Transactions",
+    subtitle: "Review your history",
+  },
 ];
 
 function getHeader(pathname) {
-  return headerMap.find((x) => x.match.test(pathname)) || {
-    title: "Smart Expense",
-    subtitle: "Stay on track",
-  };
+  return (
+    headerMap.find((x) => x.match.test(pathname)) || {
+      title: "Smart Expense",
+      subtitle: "Stay on track",
+    }
+  );
 }
 
 export default function HomeLayout() {
@@ -28,6 +42,7 @@ export default function HomeLayout() {
   const { title, subtitle } = getHeader(pathname);
 
   const isMobile = useMediaQuery("(max-width:900px)");
+  //`useMediaQuery("(max-width:900px)")` works, but tying the breakpoint to a raw string can drift away from the design system. If you are using MUI already, prefer theme breakpoints for consistency.
   const [open, setOpen] = useState(false);
 
   const closeDrawer = () => setOpen(false);
@@ -37,7 +52,11 @@ export default function HomeLayout() {
       {isMobile ? (
         <>
           <section className="mobileTop">
-            <IconButton onClick={() => setOpen(true)} size="large" aria-label="Open menu">
+            <IconButton
+              onClick={() => setOpen(true)}
+              size="large"
+              aria-label="Open menu"
+            >
               <MenuIcon />
             </IconButton>
           </section>

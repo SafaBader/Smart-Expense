@@ -12,6 +12,7 @@ export default function HomeIndex() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Another auth listener is created here even though the route is already protected by `ProtectedRoute`. This duplication increases complexity. Consider using a shared auth context or reading the current user from one central place.
     const unsub = onAuthStateChanged(auth, (u) => setUser(u));
     return () => unsub();
   }, []);
@@ -38,6 +39,7 @@ export default function HomeIndex() {
         setGoal(snap.exists() ? snap.data() : null);
       } catch (e) {
         console.error("HomeIndex load goal failed:", e);
+        // Logging the error is useful for development, but if loading the goal fails, the user gets no feedback. Add an error state in the UI. and cal it error insted of e
       } finally {
         if (alive) setLoading(false);
       }
@@ -50,6 +52,7 @@ export default function HomeIndex() {
   }, [goalRef]);
 
   if (!user) return <section className="homeLoading">Loading user...</section>;
+  //  `if (!user) return "Loading user..."` can create confusing UX if the user is actually signed out, because the page depends on route protection and internal auth resolution at the same time. Centralize auth responsibility.
   if (loading) return <section className="homeLoading">Loading...</section>;
 
   const hasGoal = !!goal?.name;
@@ -72,7 +75,6 @@ export default function HomeIndex() {
     remaining,
   });
 
-
   return (
     <section className="home">
       <header className={`hero hero--${statusTone}`}>
@@ -90,7 +92,10 @@ export default function HomeIndex() {
 
         <section className="heroProgress">
           <section className="bar">
-            <section className="barFill" style={{ width: `${Math.round(percent)}%` }} />
+            <section
+              className="barFill"
+              style={{ width: `${Math.round(percent)}%` }}
+            />
           </section>
 
           <section className="barMeta">
@@ -103,7 +108,10 @@ export default function HomeIndex() {
       </header>
 
       <section className="actions">
-        <button className="actionBtn primary" onClick={() => navigate("/home/transactions")}>
+        <button
+          className="actionBtn primary"
+          onClick={() => navigate("/home/transactions")}
+        >
           + Add Expense / Saving
         </button>
 
@@ -111,28 +119,36 @@ export default function HomeIndex() {
           + Add Expense / Saving
         </button> */}
 
-        <button className="actionBtn success" onClick={() => navigate("/home/budgets")}>
+        <button
+          className="actionBtn success"
+          onClick={() => navigate("/home/budgets")}
+        >
           + View Budget
         </button>
 
-        <button className="actionBtn ghost" onClick={() => navigate("/home/goal")}>
+        <button
+          className="actionBtn ghost"
+          onClick={() => navigate("/home/goal")}
+        >
           🎯 View Goal
         </button>
       </section>
-
-
 
       <section className="grid">
         <article className="card">
           <h3 className="cardTitle">Today’s insight</h3>
 
           {!hasGoal ? (
-            <p className="cardText">Set a goal first — then you’ll get personalized insights here.</p>
+            <p className="cardText">
+              Set a goal first — then you’ll get personalized insights here.
+            </p>
           ) : (
             <section className="insList">
               <section className="insItem">
                 <span className="insLabel">Status</span>
-                <span className={`insValue insValue--${monthlyTone(savedThisMonth, expectedMonthly)}`}>
+                <span
+                  className={`insValue insValue--${monthlyTone(savedThisMonth, expectedMonthly)}`}
+                >
                   {monthlyLabel(savedThisMonth, expectedMonthly)}
                 </span>
               </section>
@@ -153,7 +169,9 @@ export default function HomeIndex() {
           <h3 className="cardTitle">Goal preview</h3>
 
           {!hasGoal ? (
-            <p className="cardText">No goal yet. Tap “View Goal” to create one.</p>
+            <p className="cardText">
+              No goal yet. Tap “View Goal” to create one.
+            </p>
           ) : (
             <section className="goalPreview">
               <section className="goalRow">
@@ -162,7 +180,10 @@ export default function HomeIndex() {
               </section>
 
               <section className="goalBar">
-                <section className="goalBarFill" style={{ width: `${Math.round(percent)}%` }} />
+                <section
+                  className="goalBarFill"
+                  style={{ width: `${Math.round(percent)}%` }}
+                />
               </section>
 
               <section className="goalMeta">
@@ -177,7 +198,6 @@ export default function HomeIndex() {
     </section>
   );
 }
-
 
 function safeNumber(v) {
   const n = Number(v);
@@ -202,17 +222,25 @@ function getMonthKey(d) {
   return `${y}-${m}`;
 }
 
-function buildSmartMessage({ hasGoal, percent, expectedMonthly, savedThisMonth, remaining }) {
+function buildSmartMessage({
+  hasGoal,
+  percent,
+  expectedMonthly,
+  savedThisMonth,
+  remaining,
+}) {
   if (!hasGoal) {
     return {
       statusTone: "neutral",
       statusTitle: "Set a goal to start",
-      statusSubtitle: "Once you set a goal, we’ll guide you with smart insights.",
+      statusSubtitle:
+        "Once you set a goal, we’ll guide you with smart insights.",
     };
   }
 
   const hitMonthly = expectedMonthly > 0 && savedThisMonth >= expectedMonthly;
-  const closeMonthly = expectedMonthly > 0 && savedThisMonth >= expectedMonthly * 0.7;
+  const closeMonthly =
+    expectedMonthly > 0 && savedThisMonth >= expectedMonthly * 0.7;
 
   if (percent >= 100) {
     return {

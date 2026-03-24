@@ -13,7 +13,7 @@ function money(n) {
 function BudgetCard({ id, name, spent, limit, onDelete, onUpdate }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newLimit, setNewLimit] = useState(limit);
-
+  //`useMemo` for `spentNum` and `limitNum` is not really buying much here because the computations are tiny. It is not wrong, just unnecessary complexity for simple numeric coercion.
   const spentNum = useMemo(() => Number(spent) || 0, [spent]);
   const limitNum = useMemo(() => Number(limit) || 0, [limit]);
 
@@ -60,6 +60,7 @@ function BudgetCard({ id, name, spent, limit, onDelete, onUpdate }) {
           />
           <button
             type="button"
+            // Saving immediately closes edit mode without validating that `newLimit` is a positive number. The parent converts it, but the child should not allow obviously invalid values to be submitted.
             onClick={() => {
               onUpdate(id, newLimit);
               setIsEditing(false);
@@ -78,7 +79,9 @@ function BudgetCard({ id, name, spent, limit, onDelete, onUpdate }) {
             <span>Limit: {money(limitNum)}</span>
           </section>
 
-          <p className={`budgetCard_remaining ${remaining < 0 ? "neg" : "pos"}`}>
+          <p
+            className={`budgetCard_remaining ${remaining < 0 ? "neg" : "pos"}`}
+          >
             Remaining: {money(remaining)}
           </p>
         </>

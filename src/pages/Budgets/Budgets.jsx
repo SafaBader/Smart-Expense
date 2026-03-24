@@ -12,7 +12,7 @@ import "./Budgets.css";
 
 function Budgets() {
   const userId = auth.currentUser?.uid;
-
+  //`const userId = auth.currentUser?.uid;` reads auth state synchronously. On initial render, `currentUser` may be `null` even for a valid session. This can create fragile data loading. Prefer listening to auth state or using shared auth context.
   const [budgets, setBudgets] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,6 +25,7 @@ function Budgets() {
       setBudgets(data);
     }
     fetchData();
+    // The fetch has no error handling. If Firestore fails, the page silently breaks.
   }, [userId]);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ function Budgets() {
 
     const q = query(
       collection(db, "users", userId, "transactions"),
-      orderBy("createdAt", "desc")
+      orderBy("createdAt", "desc"),
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -49,7 +50,7 @@ function Budgets() {
 
     return () => unsubscribe();
   }, [userId]);
-
+  //After creating a budget you re-fetch the entire budget collection. That works, but it is less efficient than updating local state from the created item or subscribing to budgets with `onSnapshot`.
   async function handleCreateBudget(newBudget) {
     if (!userId) return;
 
@@ -131,8 +132,12 @@ function Budgets() {
 
       <SummaryBudgets totals={totals} />
       <BudgetAlerts alerts={alerts} />
-
-      <AllBudgets budgets={budgetsWithSpent} setBudgets={setBudgets} userId={userId} />
+      {/* Passing `setBudgets` into `AllBudgets` gives the child direct control over parent state shape. It works, but it couples the child tightly to the parent. Prefer passing domain actions (`onDeleteBudget`, `onUpdateBudget`) instead. */}
+      <AllBudgets
+        budgets={budgetsWithSpent}
+        setBudgets={setBudgets}
+        userId={userId}
+      />
 
       <SetBudgetModal
         isOpen={isModalOpen}

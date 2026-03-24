@@ -10,7 +10,7 @@ import "./Settings.css";
 
 export default function Settings() {
   const user = auth.currentUser;
-
+  // `const user = auth.currentUser;` is a synchronous snapshot and will not reactively update if auth state changes after render. Use auth state subscription or context.
   const [email, setEmail] = useState(user?.email || "");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -55,7 +55,10 @@ export default function Settings() {
     } catch (err) {
       console.error("Firebase error:", err?.code, err?.message);
 
-      if (err?.code === "auth/wrong-password" || err?.code === "auth/invalid-credential") {
+      if (
+        err?.code === "auth/wrong-password" ||
+        err?.code === "auth/invalid-credential"
+      ) {
         setMessage("Current password is incorrect ");
       } else if (err?.code === "auth/email-already-in-use") {
         setMessage("This email is already in use ");
@@ -100,7 +103,9 @@ export default function Settings() {
             placeholder="Enter new password"
           />
           {isWeakPassword && (
-            <small className="hint">Password must be at least 6 characters</small>
+            <small className="hint">
+              Password must be at least 6 characters
+            </small>
           )}
         </label>
 

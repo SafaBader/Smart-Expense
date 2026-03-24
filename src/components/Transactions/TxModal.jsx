@@ -52,6 +52,8 @@ function TxModal({ form, setForm, categories, onClose, onSubmit }) {
           <input
             type="number"
             value={form.amount}
+            // * `amount` is accepted as any numeric string, including negative values and empty values. This should be validated before submission.
+
             onChange={(e) => setForm({ ...form, amount: e.target.value })}
           />
 

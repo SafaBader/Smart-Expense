@@ -1,32 +1,33 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import FormLabel from '@mui/material/FormLabel';
-import FormControl from '@mui/material/FormControl';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-import Card from '@mui/material/Card';
-import Divider from '@mui/material/Divider';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import FormLabel from "@mui/material/FormLabel";
+import FormControl from "@mui/material/FormControl";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import Card from "@mui/material/Card";
+import Divider from "@mui/material/Divider";
 
-import { useNavigate, Link as RouterLink } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase/firebase';
+import { useNavigate, Link as RouterLink } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/firebase";
 
-import logo from '../assets/logo.png';
+import logo from "../assets/logo.png";
+// Because the file is very large, any future design change to the auth pages will likely require editing two places instead of one.
 
 export default function Signup() {
   const navigate = useNavigate();
 
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [confirmPassword, setConfirmPassword] = React.useState('');
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
 
   const [emailError, setEmailError] = React.useState(false);
-  const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
   const [passwordError, setPasswordError] = React.useState(false);
-  const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
+  const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("");
 
   const [loading, setLoading] = React.useState(false);
 
@@ -35,24 +36,24 @@ export default function Signup() {
 
     if (!email || !/\S+@\S+\.\S+/.test(email)) {
       setEmailError(true);
-      setEmailErrorMessage('Please enter a valid email address.');
+      setEmailErrorMessage("Please enter a valid email address.");
       isValid = false;
     } else {
       setEmailError(false);
-      setEmailErrorMessage('');
+      setEmailErrorMessage("");
     }
 
     if (!password || password.length < 6) {
       setPasswordError(true);
-      setPasswordErrorMessage('Password must be at least 6 characters long.');
+      setPasswordErrorMessage("Password must be at least 6 characters long.");
       isValid = false;
     } else if (password !== confirmPassword) {
       setPasswordError(true);
-      setPasswordErrorMessage('Passwords do not match.');
+      setPasswordErrorMessage("Passwords do not match.");
       isValid = false;
     } else {
       setPasswordError(false);
-      setPasswordErrorMessage('');
+      setPasswordErrorMessage("");
     }
 
     return isValid;
@@ -65,23 +66,25 @@ export default function Signup() {
     setLoading(true);
     try {
       await createUserWithEmailAndPassword(auth, email.trim(), password);
-      navigate('/home');
+      navigate("/home");
     } catch (error) {
-      console.error('Signup error:', error);
+      console.error("Signup error:", error);
 
-      const code = error?.code || '';
-      if (code === 'auth/email-already-in-use') {
+      const code = error?.code || "";
+      if (code === "auth/email-already-in-use") {
         setEmailError(true);
-        setEmailErrorMessage('This email is already in use.');
-      } else if (code === 'auth/invalid-email') {
+        setEmailErrorMessage("This email is already in use.");
+      } else if (code === "auth/invalid-email") {
         setEmailError(true);
-        setEmailErrorMessage('Invalid email address.');
-      } else if (code === 'auth/weak-password') {
+        setEmailErrorMessage("Invalid email address.");
+      } else if (code === "auth/weak-password") {
         setPasswordError(true);
-        setPasswordErrorMessage('Password is too weak. Use at least 6 characters.');
+        setPasswordErrorMessage(
+          "Password is too weak. Use at least 6 characters.",
+        );
       } else {
         setPasswordError(true);
-        setPasswordErrorMessage('Signup failed. Please try again.');
+        setPasswordErrorMessage("Signup failed. Please try again.");
       }
     } finally {
       setLoading(false);
@@ -94,16 +97,16 @@ export default function Signup() {
 
       <Box
         sx={{
-          minHeight: '100dvh',
-          display: 'grid',
-          placeItems: 'center',
+          minHeight: "100dvh",
+          display: "grid",
+          placeItems: "center",
           p: { xs: 1.5, sm: 2 },
-          position: 'relative',
-          overflow: 'hidden',
+          position: "relative",
+          overflow: "hidden",
           background:
-            'radial-gradient(1100px circle at 18% 12%, rgba(34,197,94,0.22), transparent 55%),' +
-            'radial-gradient(950px circle at 82% 28%, rgba(250,204,21,0.18), transparent 55%),' +
-            'linear-gradient(180deg, #f0fdf4 0%, #ecfdf5 100%)',
+            "radial-gradient(1100px circle at 18% 12%, rgba(34,197,94,0.22), transparent 55%)," +
+            "radial-gradient(950px circle at 82% 28%, rgba(250,204,21,0.18), transparent 55%)," +
+            "linear-gradient(180deg, #f0fdf4 0%, #ecfdf5 100%)",
         }}
       >
         <BlobLayer />
@@ -112,15 +115,15 @@ export default function Signup() {
         <Box
           aria-hidden
           sx={{
-            position: 'absolute',
+            position: "absolute",
             inset: 0,
             opacity: { xs: 0.18, sm: 0.22 },
             backgroundImage:
-              'linear-gradient(rgba(2,6,23,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(2,6,23,0.06) 1px, transparent 1px)',
-            backgroundSize: { xs: '38px 38px', sm: '44px 44px' },
+              "linear-gradient(rgba(2,6,23,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(2,6,23,0.06) 1px, transparent 1px)",
+            backgroundSize: { xs: "38px 38px", sm: "44px 44px" },
             maskImage:
-              'radial-gradient(circle at 50% 35%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%)',
-            pointerEvents: 'none',
+              "radial-gradient(circle at 50% 35%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%)",
+            pointerEvents: "none",
           }}
         />
 
@@ -130,47 +133,47 @@ export default function Signup() {
           src={logo}
           alt=""
           sx={{
-            position: 'absolute',
+            position: "absolute",
             left: { xs: -110, sm: -95, md: -70 },
             bottom: { xs: -140, sm: -120, md: -90 },
             width: { xs: 240, sm: 280, md: 360 },
             opacity: 0.05,
-            filter: 'blur(2px)',
-            transform: 'rotate(10deg)',
-            pointerEvents: 'none',
-            userSelect: 'none',
-            maxWidth: 'none',
+            filter: "blur(2px)",
+            transform: "rotate(10deg)",
+            pointerEvents: "none",
+            userSelect: "none",
+            maxWidth: "none",
           }}
         />
 
         <Box
           sx={{
-            width: '100%',
+            width: "100%",
             maxWidth: 980,
-            position: 'relative',
+            position: "relative",
             zIndex: 1,
-            display: 'grid',
-            gridTemplateColumns: { xs: '1fr', md: '0.85fr 1.15fr' },
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "0.85fr 1.15fr" },
             gap: { xs: 1.5, sm: 2 },
-            alignItems: 'stretch',
+            alignItems: "stretch",
           }}
         >
           <Card
             elevation={0}
             sx={{
-              display: { xs: 'none', md: 'flex' },
-              flexDirection: 'column',
-              justifyContent: 'space-between',
+              display: { xs: "none", md: "flex" },
+              flexDirection: "column",
+              justifyContent: "space-between",
               p: 4,
               borderRadius: 4,
-              border: '1px solid',
-              borderColor: 'rgba(2,6,23,0.10)',
+              border: "1px solid",
+              borderColor: "rgba(2,6,23,0.10)",
               background:
-                'linear-gradient(135deg, rgba(34,197,94,0.14), rgba(250,204,21,0.10))',
+                "linear-gradient(135deg, rgba(34,197,94,0.14), rgba(250,204,21,0.10))",
               boxShadow:
-                '0 14px 40px rgba(2, 6, 23, 0.08), 0 2px 10px rgba(2, 6, 23, 0.04)',
-              position: 'relative',
-              overflow: 'hidden',
+                "0 14px 40px rgba(2, 6, 23, 0.08), 0 2px 10px rgba(2, 6, 23, 0.04)",
+              position: "relative",
+              overflow: "hidden",
               minHeight: 520,
             }}
           >
@@ -180,8 +183,8 @@ export default function Signup() {
               </Typography>
 
               <Typography color="text.secondary">
-                Create your Smart Expense account to organize transactions, control your budget,
-                and stay focused on your financial goals.
+                Create your Smart Expense account to organize transactions,
+                control your budget, and stay focused on your financial goals.
               </Typography>
 
               <Stack spacing={1.25} sx={{ mt: 3 }}>
@@ -210,52 +213,55 @@ export default function Signup() {
             sx={{
               p: { xs: 2.25, sm: 4 },
               borderRadius: { xs: 3, sm: 4 },
-              border: '1px solid',
-              borderColor: 'rgba(2,6,23,0.10)',
+              border: "1px solid",
+              borderColor: "rgba(2,6,23,0.10)",
               boxShadow:
-                '0 18px 55px rgba(2, 6, 23, 0.10), 0 2px 10px rgba(2, 6, 23, 0.06)',
-              backdropFilter: 'blur(10px)',
-              backgroundColor: 'rgba(255,255,255,0.84)',
-              position: 'relative',
-              overflow: 'hidden',
-              animation: 'cardIn 540ms cubic-bezier(.2,.9,.2,1) both',
-              '@keyframes cardIn': {
-                from: { opacity: 0, transform: 'translateY(14px) scale(0.99)' },
-                to: { opacity: 1, transform: 'translateY(0px) scale(1)' },
+                "0 18px 55px rgba(2, 6, 23, 0.10), 0 2px 10px rgba(2, 6, 23, 0.06)",
+              backdropFilter: "blur(10px)",
+              backgroundColor: "rgba(255,255,255,0.84)",
+              position: "relative",
+              overflow: "hidden",
+              animation: "cardIn 540ms cubic-bezier(.2,.9,.2,1) both",
+              "@keyframes cardIn": {
+                from: { opacity: 0, transform: "translateY(14px) scale(0.99)" },
+                to: { opacity: 1, transform: "translateY(0px) scale(1)" },
               },
-              '&::before': {
+              "&::before": {
                 content: '""',
-                position: 'absolute',
+                position: "absolute",
                 inset: -2,
                 background:
-                  'linear-gradient(90deg, rgba(34,197,94,0.35), rgba(250,204,21,0.28))',
-                filter: { xs: 'blur(14px)', sm: 'blur(18px)' },
+                  "linear-gradient(90deg, rgba(34,197,94,0.35), rgba(250,204,21,0.28))",
+                filter: { xs: "blur(14px)", sm: "blur(18px)" },
                 opacity: 0.55,
                 zIndex: 0,
-                animation: 'glow 2.8s ease-in-out infinite',
+                animation: "glow 2.8s ease-in-out infinite",
               },
-              '@keyframes glow': {
-                '0%, 100%': { opacity: 0.35 },
-                '50%': { opacity: 0.65 },
+              "@keyframes glow": {
+                "0%, 100%": { opacity: 0.35 },
+                "50%": { opacity: 0.65 },
               },
             }}
           >
-            <Box sx={{ position: 'relative', zIndex: 1 }}>
+            <Box sx={{ position: "relative", zIndex: 1 }}>
               <Button
                 component={RouterLink}
                 to="/"
                 variant="text"
                 sx={{
-                  alignSelf: 'flex-start',
+                  alignSelf: "flex-start",
                   mb: 1,
                   fontWeight: 800,
-                  textTransform: 'none',
+                  textTransform: "none",
                 }}
               >
                 ← Back
               </Button>
 
-              <Stack spacing={1} sx={{ mb: 2, alignItems: 'center', textAlign: 'center' }}>
+              <Stack
+                spacing={1}
+                sx={{ mb: 2, alignItems: "center", textAlign: "center" }}
+              >
                 <Box
                   component="img"
                   src={logo}
@@ -263,12 +269,12 @@ export default function Signup() {
                   sx={{
                     width: { xs: 76, sm: 92 },
                     height: { xs: 76, sm: 92 },
-                    objectFit: 'contain',
-                    filter: 'drop-shadow(0px 12px 22px rgba(2,6,23,0.18))',
-                    animation: 'float 2.8s ease-in-out infinite',
-                    '@keyframes float': {
-                      '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-                      '50%': { transform: 'translateY(-10px) rotate(1deg)' },
+                    objectFit: "contain",
+                    filter: "drop-shadow(0px 12px 22px rgba(2,6,23,0.18))",
+                    animation: "float 2.8s ease-in-out infinite",
+                    "@keyframes float": {
+                      "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
+                      "50%": { transform: "translateY(-10px) rotate(1deg)" },
                     },
                   }}
                 />
@@ -278,12 +284,13 @@ export default function Signup() {
                   sx={{
                     fontWeight: 900,
                     letterSpacing: { xs: 0.5, sm: 1 },
-                    background: 'linear-gradient(90deg, #16a34a, #22c55e, #facc15)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
+                    background:
+                      "linear-gradient(90deg, #16a34a, #22c55e, #facc15)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
                     lineHeight: 1.05,
                     fontSize: { xs: 36, sm: 48, md: 56 },
-                    wordBreak: 'break-word',
+                    wordBreak: "break-word",
                   }}
                 >
                   Smart Expense
@@ -294,7 +301,8 @@ export default function Signup() {
                   color="text.secondary"
                   sx={{ maxWidth: 420, px: { xs: 0.5, sm: 0 } }}
                 >
-                  Create your account and start building better money habits today.
+                  Create your account and start building better money habits
+                  today.
                 </Typography>
               </Stack>
 
@@ -302,7 +310,7 @@ export default function Signup() {
                 component="form"
                 onSubmit={handleSubmit}
                 noValidate
-                sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+                sx={{ display: "flex", flexDirection: "column", gap: 2 }}
               >
                 <FormControl>
                   <FormLabel htmlFor="email">Email</FormLabel>
@@ -339,7 +347,9 @@ export default function Signup() {
                 </FormControl>
 
                 <FormControl>
-                  <FormLabel htmlFor="confirmPassword">Confirm password</FormLabel>
+                  <FormLabel htmlFor="confirmPassword">
+                    Confirm password
+                  </FormLabel>
                   <TextField
                     id="confirmPassword"
                     name="confirmPassword"
@@ -365,23 +375,23 @@ export default function Signup() {
                     py: 1.2,
                     fontWeight: 800,
                     borderRadius: 3,
-                    background: 'linear-gradient(90deg, #16a34a, #22c55e)',
-                    boxShadow: '0 10px 25px rgba(34,197,94,0.25)',
-                    '&:hover': {
-                      background: 'linear-gradient(90deg, #15803d, #16a34a)',
+                    background: "linear-gradient(90deg, #16a34a, #22c55e)",
+                    boxShadow: "0 10px 25px rgba(34,197,94,0.25)",
+                    "&:hover": {
+                      background: "linear-gradient(90deg, #15803d, #16a34a)",
                     },
                   }}
                 >
-                  {loading ? 'Creating account…' : 'Sign up'}
+                  {loading ? "Creating account…" : "Sign up"}
                 </Button>
 
                 <Divider
                   sx={{
                     my: 1,
                     fontWeight: 800,
-                    color: '#64748b',
-                    '&::before, &::after': {
-                      borderColor: 'rgba(34,197,94,0.30)',
+                    color: "#64748b",
+                    "&::before, &::after": {
+                      borderColor: "rgba(34,197,94,0.30)",
                     },
                   }}
                 >
@@ -395,14 +405,14 @@ export default function Signup() {
                   component={RouterLink}
                   to="/login"
                   sx={{
-                    textDecoration: 'none',
+                    textDecoration: "none",
                     borderRadius: 3,
                     fontWeight: 800,
-                    borderColor: 'rgba(59,130,246,0.55)',
-                    color: '#1d4ed8',
-                    '&:hover': {
-                      borderColor: 'rgba(37,99,235,0.75)',
-                      backgroundColor: 'rgba(59,130,246,0.06)',
+                    borderColor: "rgba(59,130,246,0.55)",
+                    color: "#1d4ed8",
+                    "&:hover": {
+                      borderColor: "rgba(37,99,235,0.75)",
+                      backgroundColor: "rgba(59,130,246,0.06)",
                     },
                   }}
                 >
@@ -423,8 +433,8 @@ function FeatureItem({ title, text }) {
       sx={{
         p: 2,
         borderRadius: 3,
-        backgroundColor: 'rgba(255, 255, 255, 0.62)',
-        border: '1px solid rgba(2,6,23,0.08)',
+        backgroundColor: "rgba(255, 255, 255, 0.62)",
+        border: "1px solid rgba(2,6,23,0.08)",
       }}
     >
       <Typography sx={{ fontWeight: 800, mb: 0.25 }}>{title}</Typography>
@@ -440,18 +450,18 @@ function BlobLayer() {
     <Box
       aria-hidden
       sx={{
-        position: 'absolute',
+        position: "absolute",
         inset: 0,
-        pointerEvents: 'none',
+        pointerEvents: "none",
         zIndex: 0,
-        '& .blob': {
-          position: 'absolute',
+        "& .blob": {
+          position: "absolute",
           width: { xs: 260, sm: 320, md: 520 },
           height: { xs: 260, sm: 320, md: 520 },
-          borderRadius: '40% 60% 55% 45% / 45% 45% 55% 55%',
-          filter: { xs: 'blur(22px)', sm: 'blur(28px)' },
+          borderRadius: "40% 60% 55% 45% / 45% 45% 55% 55%",
+          filter: { xs: "blur(22px)", sm: "blur(28px)" },
           opacity: 0.55,
-          mixBlendMode: 'multiply',
+          mixBlendMode: "multiply",
         },
       }}
     >
@@ -460,11 +470,16 @@ function BlobLayer() {
         sx={{
           top: { xs: -140, sm: -120, md: -160 },
           left: { xs: -170, sm: -140, md: -160 },
-          background: 'radial-gradient(circle at 30% 30%, rgba(34,197,94,0.72), transparent 60%)',
-          animation: 'blobA 9s ease-in-out infinite',
-          '@keyframes blobA': {
-            '0%, 100%': { transform: 'translate(0px,0px) rotate(0deg) scale(1)' },
-            '50%': { transform: 'translate(60px,40px) rotate(10deg) scale(1.08)' },
+          background:
+            "radial-gradient(circle at 30% 30%, rgba(34,197,94,0.72), transparent 60%)",
+          animation: "blobA 9s ease-in-out infinite",
+          "@keyframes blobA": {
+            "0%, 100%": {
+              transform: "translate(0px,0px) rotate(0deg) scale(1)",
+            },
+            "50%": {
+              transform: "translate(60px,40px) rotate(10deg) scale(1.08)",
+            },
           },
         }}
       />
@@ -473,11 +488,16 @@ function BlobLayer() {
         sx={{
           top: { xs: 30, sm: 60, md: 80 },
           right: { xs: -210, sm: -160, md: -220 },
-          background: 'radial-gradient(circle at 40% 35%, rgba(250,204,21,0.62), transparent 60%)',
-          animation: 'blobB 10.5s ease-in-out infinite',
-          '@keyframes blobB': {
-            '0%, 100%': { transform: 'translate(0px,0px) rotate(0deg) scale(1)' },
-            '50%': { transform: 'translate(-70px,30px) rotate(-12deg) scale(1.12)' },
+          background:
+            "radial-gradient(circle at 40% 35%, rgba(250,204,21,0.62), transparent 60%)",
+          animation: "blobB 10.5s ease-in-out infinite",
+          "@keyframes blobB": {
+            "0%, 100%": {
+              transform: "translate(0px,0px) rotate(0deg) scale(1)",
+            },
+            "50%": {
+              transform: "translate(-70px,30px) rotate(-12deg) scale(1.12)",
+            },
           },
         }}
       />
@@ -486,11 +506,16 @@ function BlobLayer() {
         sx={{
           bottom: { xs: -210, sm: -170, md: -220 },
           left: { xs: 10, sm: 60, md: 140 },
-          background: 'radial-gradient(circle at 45% 40%, rgba(16,185,129,0.55), transparent 60%)',
-          animation: 'blobC 12s ease-in-out infinite',
-          '@keyframes blobC': {
-            '0%, 100%': { transform: 'translate(0px,0px) rotate(0deg) scale(1)' },
-            '50%': { transform: 'translate(40px,-40px) rotate(8deg) scale(1.10)' },
+          background:
+            "radial-gradient(circle at 45% 40%, rgba(16,185,129,0.55), transparent 60%)",
+          animation: "blobC 12s ease-in-out infinite",
+          "@keyframes blobC": {
+            "0%, 100%": {
+              transform: "translate(0px,0px) rotate(0deg) scale(1)",
+            },
+            "50%": {
+              transform: "translate(40px,-40px) rotate(8deg) scale(1.10)",
+            },
           },
         }}
       />
@@ -503,20 +528,23 @@ function ParticlesLayer() {
     <Box
       aria-hidden
       sx={{
-        position: 'absolute',
+        position: "absolute",
         inset: 0,
-        pointerEvents: 'none',
+        pointerEvents: "none",
         zIndex: 0,
         opacity: { xs: 0.32, sm: 0.42 },
         backgroundImage:
-          'radial-gradient(circle, rgba(2,6,23,0.10) 1px, transparent 1.2px),' +
-          'radial-gradient(circle, rgba(2,6,23,0.08) 1px, transparent 1.2px)',
-        backgroundSize: { xs: '34px 34px, 60px 60px', sm: '40px 40px, 70px 70px' },
-        backgroundPosition: '0 0, 10px 15px',
-        animation: 'drift 18s linear infinite',
-        '@keyframes drift': {
-          from: { transform: 'translate3d(0px,0px,0px)' },
-          to: { transform: 'translate3d(-60px, -80px, 0px)' },
+          "radial-gradient(circle, rgba(2,6,23,0.10) 1px, transparent 1.2px)," +
+          "radial-gradient(circle, rgba(2,6,23,0.08) 1px, transparent 1.2px)",
+        backgroundSize: {
+          xs: "34px 34px, 60px 60px",
+          sm: "40px 40px, 70px 70px",
+        },
+        backgroundPosition: "0 0, 10px 15px",
+        animation: "drift 18s linear infinite",
+        "@keyframes drift": {
+          from: { transform: "translate3d(0px,0px,0px)" },
+          to: { transform: "translate3d(-60px, -80px, 0px)" },
         },
       }}
     />

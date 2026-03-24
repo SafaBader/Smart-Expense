@@ -15,3 +15,5 @@ function HeaderBudget({ onSetBudgetClick }) {
 }
 
 export default HeaderBudget;
+
+// Very clean and focused component.

@@ -12,6 +12,8 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+//There is no validation/fail-fast check for missing env variables. If one key is missing, the app may fail in a confusing way. Add a startup guard that throws a clear error when required values are absent.
 
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+//Good job reading Firebase config from environment variables instead of hardcoding secrets in source code.

@@ -27,7 +27,7 @@ const CATEGORIES = [
   "Bills",
   "Other",
 ];
-
+//`CATEGORIES` as a top-level constant is fine, but it must stay aligned with whatever users can actually enter in `TxModal`.
 export default function TransactionsPage() {
   // Store all transactions
   const [items, setItems] = useState([]);
@@ -77,6 +77,7 @@ export default function TransactionsPage() {
   // Listen to user's transactions
   useEffect(() => {
     if (!uid) {
+      //When `uid` is missing, loading becomes `false` and the page behaves like “empty transactions”. That may hide auth issues. Consider a distinct unauthenticated/error state.
       setItems([]); // clear transactions
       setLoading(false); // stop loading
       return;
@@ -138,6 +139,7 @@ export default function TransactionsPage() {
   }, [items, search, typeFilter, catFilter]);
 
   // Add transaction
+  // addTransaction` does not validate category or amount before writing. Invalid or empty data can reach Firestore.
   async function addTransaction(e) {
     e.preventDefault(); // stop page reload
 
